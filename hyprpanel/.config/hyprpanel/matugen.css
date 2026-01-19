@@ -1,0 +1,39 @@
+/* --- GTK COLORS (For Widgets) --- */
+@define-color primary #c1cd7d;
+@define-color secondary #c6c9a7;
+@define-color tertiary #a2d0c3;
+
+@define-color background #13140d;
+@define-color surface #1f2018;
+@define-color surface_dim #13140d;
+@define-color surface_bright #393a31;
+
+@define-color error #ffb4ab;
+
+@define-color on_primary #2d3400;
+@define-color on_secondary #2f321a;
+@define-color on_background #e4e3d6;
+@define-color on_surface #e4e3d6;
+
+/* Common Hyprpanel Mappings */
+@define-color accent_color @primary;
+@define-color accent_bg_color @primary;
+@define-color window_bg_color @background;
+@define-color window_fg_color @on_background;
+
+/* --- CSS VARIABLES (For Shell/Layout) --- */
+* {
+    --primary: #c1cd7d;
+    --secondary: #c6c9a7;
+    --tertiary: #a2d0c3;
+    
+    --background: #13140d;
+    --surface: #1f2018;
+    
+    --on-primary: #2d3400;
+    --on-secondary: #2f321a;
+    --on-background: #e4e3d6;
+    --text: #e4e3d6;
+    
+    --error: #ffb4ab;
+}

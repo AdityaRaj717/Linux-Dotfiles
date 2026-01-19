@@ -1,0 +1,24 @@
+[config]
+# reload_apps = false
+
+# --- Hyprland ---
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/hyprland_colors.conf"
+output_path = "~/.config/hypr/colors.conf"
+
+# --- Kitty ---
+[templates.kitty]
+input_path = "~/.config/matugen/templates/kitty_colors.conf"
+output_path = "~/.config/kitty/themes/Matugen.conf"
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi_colors.rasi'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.btop]
+input_path = "~/.config/matugen/templates/btop.conf"
+output_path = "~/.config/btop/themes/matugen.theme"
+
+[templates.cava]
+input_path = "~/.config/matugen/templates/cava_config"
+output_path = "~/.config/cava/config"
