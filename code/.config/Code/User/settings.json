@@ -1,0 +1,149 @@
+{
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "launch": {},
+  "[json]": {},
+  "update.showReleaseNotes": false,
+  "breadcrumbs.enabled": false,
+  "material-icon-theme.hidesExplorerArrows": true,
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "workbench.sideBar.location": "right",
+  "workbench.tree.renderIndentGuides": "none",
+  "zenMode.hideLineNumbers": false,
+  "editor.lineNumbers": "relative",
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "window.zoomLevel": 2,
+  "window.customTitleBarVisibility": "never",
+  "window.titleBarStyle": "native",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnSave": true,
+  "editor.suggest.insertMode": "replace",
+  "editor.linkedEditing": true,
+  "editor.minimap.enabled": false,
+  "editor.lineHeight": 1.6,
+  "editor.stickyScroll.enabled": false,
+  "editor.lightbulb.enabled": "off",
+  "editor.showFoldingControls": "never",
+  "editor.renderWhitespace": "none",
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+
+  "editor.fontFamily": "MonoLisa",
+  "editor.fontLigatures": "'ss02', 'onum', 'ss11', 'liga'",
+  "files.trimTrailingWhitespace": true,
+  // "scm.diffDecorations": "none",
+  // "editor.hideCursorInOverviewRuler": true,
+
+  "vim.leader": "<Space>",
+  "vim.hlsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // NAVIGATION
+    // switch b/w buffers
+    { "before": ["<S-h>"], "commands": [":bprevious"] },
+    { "before": ["<S-l>"], "commands": [":bnext"] },
+
+    // splits
+    { "before": ["leader", "v"], "commands": [":vsplit"] },
+    { "before": ["leader", "s"], "commands": [":split"] },
+
+    // panes
+    {
+      "before": ["leader", "h"],
+      "commands": ["workbench.action.focusLeftGroup"],
+    },
+    {
+      "before": ["leader", "j"],
+      "commands": ["workbench.action.focusBelowGroup"],
+    },
+    {
+      "before": ["leader", "k"],
+      "commands": ["workbench.action.focusAboveGroup"],
+    },
+    {
+      "before": ["leader", "l"],
+      "commands": ["workbench.action.focusRightGroup"],
+    },
+
+    // Search
+    {
+      "before": ["<Esc>"],
+      "commands": [":nohl"],
+    },
+
+    // NICE TO HAVE
+    { "before": ["leader", "w"], "commands": [":w!"] },
+    { "before": ["leader", "q"], "commands": [":q!"] },
+    { "before": ["leader", "x"], "commands": [":x!"] },
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.prev"],
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.next"],
+    },
+    {
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.quickFix"],
+    },
+    { "before": ["leader", "f"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["leader", "p"], "commands": ["editor.action.formatDocument"] },
+    {
+      "before": ["g", "h"],
+      "commands": ["editor.action.showDefinitionPreviewHover"],
+    },
+  ],
+  "vim.visualModeKeyBindings": [
+    // Stay in visual mode while indenting
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    // Move selected lines while staying in visual mode
+    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+    // toggle comment selection
+    { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] },
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "editor.cursorBlinking": "phase",
+  "editor.wordWrap": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "workbench.colorTheme": "Catppuccin Frappé",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "catppuccin-noctis-icons.hidesExplorerArrows": true,
+  "window.menuBarVisibility": "toggle",
+  "workbench.statusBar.visible": false,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1,
+  },
+  "editor.fontSize": 23,
+  "terminal.integrated.env.linux": {},
+  "explorer.confirmDelete": false,
+  "catppuccin-noctis-icons.folders.associations": {},
+  "catppuccin-noctis-icons.files.associations": {},
+  "symbols.hidesExplorerArrows": false,
+  "workbench.iconTheme": "catppuccin noctis icons",
+  "console-ninja.featureSet": "Community",
+  "eslint.run": "onSave",
+  "database-client.autoSync": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "editor.quickSuggestions": {
+    "strings": "on",
+  },
+  "tailwind-fold.autoFold": false,
+  "catppuccin.accentColor": "lavender",
+  "catppuccin-icons.hidesExplorerArrows": true,
+}
