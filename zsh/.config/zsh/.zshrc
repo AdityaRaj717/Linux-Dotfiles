@@ -52,3 +52,9 @@ eval "$(zoxide init zsh)"
 
 # Load Powerlevel10k config
 [[ -f "$ZDOTDIR/.p10k.zsh" ]] && source "$ZDOTDIR/.p10k.zsh"
+
+
+# Misc
+
+# Start ssh-agent and add key
+eval $(keychain --eval --quiet github_auth 2>/dev/null)
