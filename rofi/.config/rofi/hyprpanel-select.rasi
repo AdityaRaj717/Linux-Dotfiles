@@ -1,0 +1,105 @@
+/*******************************************************************************
+ * ROFI HYPRPANEL VARIANT SELECTOR
+ * Aesthetic Modern Design
+ *******************************************************************************/
+
+@import "colors.rasi"
+
+configuration {
+    show-icons:              false;
+}
+
+* {
+    bg:                      @surface;
+    bg-alt:                  @surface-container;
+    accent:                  @primary;
+    text:                    @on-surface;
+    text-dim:                @on-surface-variant;
+    
+    background-color:        transparent;
+    text-color:              @text;
+}
+
+window {
+    location:                center;
+    width:                   550px;
+    background-color:        @bg;
+    border:                  2px solid;
+    border-color:            @accent;
+    border-radius:           16px;
+    padding:                 28px;
+}
+
+mainbox {
+    spacing:                 20px;
+    children:                [ inputbar, listview ];
+}
+
+inputbar {
+    spacing:                 14px;
+    padding:                 18px 22px;
+    background-color:        @bg-alt;
+    border-radius:           12px;
+    children:                [ prompt, entry ];
+}
+
+prompt {
+    text-color:              @accent;
+    font:                    "GeistMono Nerd Font Propo Bold 12";
+    vertical-align:          0.5;
+}
+
+entry {
+    placeholder:             "Search styles...";
+    placeholder-color:       @text-dim;
+    font:                    "GeistMono Nerd Font Propo Medium 11";
+    cursor:                  text;
+    vertical-align:          0.5;
+}
+
+listview {
+    columns:                 1;
+    lines:                   7;
+    spacing:                 6px;
+    scrollbar:               false;
+    cycle:                   true;
+    dynamic:                 true;
+}
+
+element {
+    padding:                 16px 20px;
+    background-color:        transparent;
+    border-radius:           10px;
+}
+
+element normal.normal {
+    background-color:        transparent;
+}
+
+element selected.normal {
+    background-color:        @accent;
+    text-color:              @on-primary;
+}
+
+element-text {
+    vertical-align:          0.5;
+    text-color:              inherit;
+    font:                    "GeistMono Nerd Font Propo Medium 11";
+}
+
+element selected.normal element-text {
+    text-color:              @on-primary;
+    font:                    "GeistMono Nerd Font Propo Bold 11";
+}
+
+message {
+    padding:                 16px;
+    background-color:        @bg-alt;
+    border-radius:           12px;
+}
+
+textbox {
+    padding:                 10px;
+    text-color:              @text;
+    vertical-align:          0.5;
+}

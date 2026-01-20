@@ -1,0 +1,99 @@
+/*******************************************************************************
+ * ROFI THEME SELECTOR
+ * Aesthetic Modern Design with Image Grid
+ *******************************************************************************/
+
+@import "colors.rasi"
+
+configuration {
+    show-icons:              true;
+}
+
+* {
+    bg:                      @surface;
+    bg-alt:                  @surface-container;
+    accent:                  @primary;
+    text:                    @on-surface;
+    text-dim:                @on-surface-variant;
+    
+    background-color:        transparent;
+    text-color:              @text;
+}
+
+window {
+    location:                center;
+    width:                   1200px;
+    background-color:        @bg;
+    border:                  2px solid;
+    border-color:            @accent;
+    border-radius:           16px;
+    padding:                 32px;
+}
+
+mainbox {
+    spacing:                 24px;
+    children:                [ inputbar, listview ];
+}
+
+inputbar {
+    spacing:                 16px;
+    padding:                 20px 24px;
+    background-color:        @bg-alt;
+    border-radius:           12px;
+    children:                [ prompt, entry ];
+}
+
+prompt {
+    text-color:              @accent;
+    font:                    "GeistMono Nerd Font Propo Bold 13";
+    vertical-align:          0.5;
+}
+
+entry {
+    placeholder:             "Search themes...";
+    placeholder-color:       @text-dim;
+    font:                    "GeistMono Nerd Font Propo Medium 11";
+    cursor:                  text;
+    vertical-align:          0.5;
+}
+
+listview {
+    columns:                 3;
+    lines:                   2;
+    spacing:                 24px;
+    scrollbar:               false;
+    cycle:                   true;
+    dynamic:                 true;
+    fixed-height:            true;
+    fixed-columns:           true;
+}
+
+element {
+    padding:                 16px;
+    background-color:        @bg-alt;
+    border-radius:           12px;
+    orientation:             vertical;
+}
+
+element selected {
+    background-color:        transparent;
+    border:                  3px solid;
+    border-color:            @accent;
+}
+
+element-icon {
+    size:                    200px;
+    horizontal-align:        0.5;
+    margin:                  0px 0px 16px 0px;
+    border-radius:           8px;
+}
+
+element-text {
+    horizontal-align:        0.5;
+    text-color:              inherit;
+    font:                    "GeistMono Nerd Font Propo Bold 12";
+}
+
+element selected.normal element-text {
+    text-color:              @accent;
+}

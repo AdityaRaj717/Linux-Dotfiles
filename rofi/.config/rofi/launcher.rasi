@@ -1,0 +1,116 @@
+/*******************************************************************************
+ * ROFI APPLICATION LAUNCHER
+ * Aesthetic Modern Design
+ *******************************************************************************/
+
+@import "colors.rasi"
+
+configuration {
+    show-icons:              true;
+    display-drun:            "Apps";
+    drun-display-format:     "{name}";
+    disable-history:         false;
+    click-to-exit:           true;
+}
+
+* {
+    bg:                      @surface;
+    bg-alt:                  @surface-container;
+    accent:                  @primary;
+    text:                    @on-surface;
+    text-dim:                @on-surface-variant;
+    
+    background-color:        transparent;
+    text-color:              @text;
+    font:                    "GeistMono Nerd Font Propo Medium 11";
+}
+
+window {
+    location:                center;
+    width:                   650px;
+    background-color:        @bg;
+    border:                  2px solid;
+    border-color:            @accent;
+    border-radius:           12px;
+    padding:                 28px;
+}
+
+mainbox {
+    spacing:                 20px;
+    children:                [ inputbar, listview ];
+}
+
+inputbar {
+    spacing:                 14px;
+    padding:                 18px 22px;
+    background-color:        @bg-alt;
+    border-radius:           10px;
+    children:                [ prompt, entry ];
+}
+
+prompt {
+    text-color:              @accent;
+    font:                    "GeistMono Nerd Font Propo Bold 12";
+    vertical-align:          0.5;
+}
+
+entry {
+    placeholder:             "Type to search...";
+    placeholder-color:       @text-dim;
+    cursor:                  text;
+    vertical-align:          0.5;
+}
+
+listview {
+    columns:                 1;
+    lines:                   7;
+    spacing:                 6px;
+    scrollbar:               false;
+    cycle:                   true;
+    dynamic:                 true;
+}
+
+element {
+    padding:                 14px 18px;
+    background-color:        transparent;
+    border-radius:           8px;
+    spacing:                 14px;
+    orientation:             horizontal;
+}
+
+element normal.normal {
+    background-color:        transparent;
+}
+
+element selected.normal {
+    background-color:        @accent;
+    text-color:              @on-primary;
+}
+
+element-icon {
+    size:                    36px;
+    vertical-align:          0.5;
+}
+
+element-text {
+    vertical-align:          0.5;
+    text-color:              inherit;
+    font:                    "GeistMono Nerd Font Propo Medium 11";
+}
+
+element selected.normal element-text {
+    text-color:              @on-primary;
+    font:                    "GeistMono Nerd Font Propo Bold 11";
+}
+
+message {
+    padding:                 16px;
+    background-color:        @bg-alt;
+    border-radius:           10px;
+}
+
+textbox {
+    padding:                 10px;
+    text-color:              @text;
+    vertical-align:          0.5;
+}
