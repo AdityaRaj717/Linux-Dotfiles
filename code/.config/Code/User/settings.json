@@ -1,5 +1,5 @@
 {
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.fontFamily": "GeistMono Nerd Font Mono",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "launch": {},
   "[json]": {},
@@ -30,7 +30,7 @@
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
 
-  "editor.fontFamily": "MonoLisa",
+  "editor.fontFamily": "MonoLisa Nerd Font Mono",
   "editor.fontLigatures": "'ss02', 'onum', 'ss11', 'liga'",
   "files.trimTrailingWhitespace": true,
   // "scm.diffDecorations": "none",
