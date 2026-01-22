@@ -1,13 +1,8 @@
 #!/bin/bash
 
-# Emoji picker with rofi
-# Copies selected emoji to clipboard
+# Optimized emoji picker using rofi-emoji plugin
 
-# Check if rofi-emoji is available
-if ! command -v rofi &> /dev/null; then
-    notify-send "Error" "rofi is not installed"
-    exit 1
-fi
+ROFI_THEME="$HOME/.config/rofi/emoji.rasi"
 
-# Launch emoji picker
-rofi -modi emoji -show emoji -theme ~/.config/rofi/emoji.rasi
+# Launch emoji picker directly
+rofi -modi emoji -show emoji -theme "$ROFI_THEME"

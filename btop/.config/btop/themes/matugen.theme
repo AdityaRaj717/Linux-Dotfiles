@@ -2,44 +2,44 @@
 # Based on Material Design 3 colors
 
 # Main background
-theme[main_bg]="#0f1417"
+theme[main_bg]="#111318"
 
 # Main text color
-theme[main_fg]="#dfe3e7"
+theme[main_fg]="#e2e2e9"
 
 # Title color
-theme[title]="#8ecff2"
+theme[title]="#adc6ff"
 
 # Highlight/Selected
-theme[hi_fg]="#003548"
-theme[selected_bg]="#8ecff2"
-theme[selected_fg]="#003548"
+theme[hi_fg]="#102f60"
+theme[selected_bg]="#adc6ff"
+theme[selected_fg]="#102f60"
 
 # Graph colors
-theme[cpu_box]="#8ecff2"
-theme[mem_box]="#b5c9d7"
-theme[net_box]="#c9c1ea"
-theme[proc_box]="#262b2e"
+theme[cpu_box]="#adc6ff"
+theme[mem_box]="#bfc6dc"
+theme[net_box]="#debcdf"
+theme[proc_box]="#282a2f"
 
 # Graphs
-theme[cpu_start]="#8ecff2"
-theme[cpu_mid]="#004d67"
-theme[cpu_end]="#b5c9d7"
+theme[cpu_start]="#adc6ff"
+theme[cpu_mid]="#2b4678"
+theme[cpu_end]="#bfc6dc"
 
-theme[mem_start]="#b5c9d7"
-theme[mem_mid]="#364954"
-theme[mem_end]="#c9c1ea"
+theme[mem_start]="#bfc6dc"
+theme[mem_mid]="#3f4759"
+theme[mem_end]="#debcdf"
 
-theme[net_start]="#c9c1ea"
-theme[net_mid]="#474364"
-theme[net_end]="#8ecff2"
+theme[net_start]="#debcdf"
+theme[net_mid]="#583e5b"
+theme[net_end]="#adc6ff"
 
 # Process colors
-theme[proc_misc]="#c0c7cd"
-theme[proc_start]="#8ecff2"
-theme[proc_mid]="#b5c9d7"
-theme[proc_end]="#c9c1ea"
+theme[proc_misc]="#c4c6d0"
+theme[proc_start]="#adc6ff"
+theme[proc_mid]="#bfc6dc"
+theme[proc_end]="#debcdf"
 
 # Inactive/Dividers
-theme[inactive_fg]="#8a9297"
-theme[div_line]="#40484d"
+theme[inactive_fg]="#8e9099"
+theme[div_line]="#44474f"
