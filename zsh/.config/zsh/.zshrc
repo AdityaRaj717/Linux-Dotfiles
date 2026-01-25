@@ -58,3 +58,7 @@ eval "$(zoxide init zsh)"
 
 # Start ssh-agent and add key
 eval $(keychain --eval --quiet github_auth 2>/dev/null)
+
+
+# Run on launch
+nitch

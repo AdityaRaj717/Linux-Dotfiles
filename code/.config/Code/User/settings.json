@@ -1,5 +1,5 @@
 {
-  "terminal.integrated.fontFamily": "GeistMono Nerd Font Mono",
+  "terminal.integrated.fontFamily": "GeistMono Nerd Font Propo",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "launch": {},
   "[json]": {},
@@ -120,7 +120,6 @@
   "editor.wordWrap": "on",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
-  "workbench.colorTheme": "Catppuccin Frappé",
   "liveServer.settings.donotShowInfoMsg": true,
   "liveServer.settings.donotVerifyTags": true,
   "catppuccin-noctis-icons.hidesExplorerArrows": true,
@@ -146,4 +145,7 @@
   "tailwind-fold.autoFold": false,
   "catppuccin.accentColor": "lavender",
   "catppuccin-icons.hidesExplorerArrows": true,
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true
 }
