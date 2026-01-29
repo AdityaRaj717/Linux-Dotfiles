@@ -1,47 +1,44 @@
 * {
-    primary: #83d5c5;
-    primary-fixed: #9ff2e1;
-    primary-fixed-dim: #83d5c5;
-    on-primary: #003730;
-    on-primary-fixed: #00201b;
-    on-primary-fixed-variant: #005046;
-    primary-container: #005046;
-    on-primary-container: #9ff2e1;
-    secondary: #b1ccc5;
-    secondary-fixed: #cde8e1;
-    secondary-fixed-dim: #b1ccc5;
-    on-secondary: #1c3530;
-    on-secondary-fixed: #06201b;
-    on-secondary-fixed-variant: #334b46;
-    secondary-container: #334b46;
-    on-secondary-container: #cde8e1;
-    tertiary: #accae5;
-    tertiary-fixed: #cae6ff;
-    tertiary-fixed-dim: #accae5;
-    on-tertiary: #133348;
-    on-tertiary-fixed: #001e30;
-    on-tertiary-fixed-variant: #2c4a60;
-    tertiary-container: #2c4a60;
-    on-tertiary-container: #cae6ff;
-    error: #ffb4ab;
-    on-error: #690005;
-    error-container: #93000a;
-    on-error-container: #ffdad6;
-    surface: #0e1513;
-    on-surface: #dee4e1;
-    on-surface-variant: #bec9c5;
-    outline: #899390;
-    outline-variant: #3f4946;
+    background: #050505;
+    on-background: #FFFFFF;
+    
+    surface: #101010;
+    surface-dim: #050505;
+    surface-bright: #202020;
+    
+    /* Primary Text (Selected/Important) -> RED */
+    primary: #FF2A2A;
+    on-primary: #FFFFFF;
+    primary-container: #AA0000;
+    on-primary-container: #FFFFFF;
+    
+    /* Secondary Text (List Items) -> WHITE (Was Grey) */
+    secondary: #FFFFFF;
+    on-secondary: #000000;
+    secondary-container: #333333;
+    on-secondary-container: #FFFFFF;
+    
+    /* Tertiary Text -> Bright Grey */
+    tertiary: #CCCCCC;
+    on-tertiary: #000000;
+    tertiary-container: #EEEEEE;
+    on-tertiary-container: #000000;
+    
+    error: #FF2A2A;
+    on-error: #000000;
+    error-container: #AA0000;
+    on-error-container: #FFFFFF;
+    
+    /* Surface Text (Normal Text) -> Pure White */
+    on-surface: #FFFFFF;
+    on-surface-variant: #CCCCCC; 
+    
+    outline: #666666;
+    outline-variant: #333333;
     shadow: #000000;
     scrim: #000000;
-    inverse-surface: #dee4e1;
-    inverse-on-surface: #2b3230;
-    inverse-primary: #006b5e;
-    surface-dim: #0e1513;
-    surface-bright: #343b39;
-    surface-container-lowest: #090f0e;
-    surface-container-low: #171d1b;
-    surface-container: #1b211f;
-    surface-container-high: #252b2a;
-    surface-container-highest: #303634;
+    
+    inverse-surface: #FFFFFF;
+    inverse-on-surface: #000000;
+    inverse-primary: #FF2A2A;
 }

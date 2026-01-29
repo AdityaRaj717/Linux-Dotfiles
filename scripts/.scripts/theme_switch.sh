@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Optimized theme switcher with VS Code "Live Inject"
-# Dependencies: rofi, swww, jq, sed, matugen (optional)
+# Optimized theme switcher with "Live Inject" & App Reloads
+# Fixes: Race Condition (Red Bar), Cava Reload, Btop (via SIGUSR2)
 
 WALLPAPER_ROOT="$HOME/Pictures/Wallpapers"
 CACHE_FILE="$HOME/.cache/current_theme"
@@ -36,7 +36,7 @@ notify-send "Theme" "Applying $THEME_NAME..."
 # Update cache
 echo "$THEME_NAME" > "$CACHE_FILE"
 
-# --- SYSTEM COLORS (Kitty/Matugen) ---
+# --- 1. GENERATE COLORS ---
 if [ -x "$THEME_DIR/colors.sh" ]; then
     "$THEME_DIR/colors.sh" "$DEFAULT_WALL"
 else
@@ -46,77 +46,54 @@ else
     fi
 fi
 
-# --- VS CODE LIVE INJECT ---
+# --- 2. VS CODE INJECT ---
 VSCODE_SETTINGS="$HOME/.config/Code/User/settings.json"
 THEME_JSON="$THEME_DIR/vscode.json"
 
-if [ ! -f "$VSCODE_SETTINGS" ]; then
-    notify-send "Error" "VS Code settings not found."
-elif [ ! -f "$THEME_JSON" ]; then
-    notify-send "Warning" "No vscode.json found in $THEME_NAME folder."
-else
-    # 2. Define Cleaner Function (URL-Safe & Trailing Comma Remover)
+if [ -f "$VSCODE_SETTINGS" ] && [ -f "$THEME_JSON" ]; then
     clean_json() {
-        # 1. Remove CRLF (\r) for Windows compatibility
-        # 2. Remove full-line comments (start with whitespace + //)
-        # 3. Remove inline comments (space + //), preserving URLs like http://
-        # 4. Remove trailing commas (using -z for multiline)
-        tr -d '\r' < "$1" | \
-        sed -E 's|^[[:space:]]*//.*||g' | \
-        sed -E 's|([[:space:]])//.*|\1|g' | \
-        sed -z 's/,\s*}/}/g; s/,\s*]/]/g'
+        tr -d '\r' < "$1" | sed -E 's|^[[:space:]]*//.*||g' | sed -E 's|([[:space:]])//.*|\1|g' | sed -z 's/,\s*}/}/g; s/,\s*]/]/g'
     }
 
-    # 3. Validation Step
-    # We parse the cleaned theme first to catch syntax errors early
-    THEME_ERRORS=$(clean_json "$THEME_JSON" | jq '.' 2>&1 >/dev/null)
-    
-    if [ $? -ne 0 ]; then
-        SHORT_ERR=$(echo "$THEME_ERRORS" | head -n 1)
-        notify-send "Theme Error" "Invalid JSON in $THEME_NAME: $SHORT_ERR"
-        exit 1
+    if clean_json "$THEME_JSON" | jq '.' >/dev/null 2>&1; then
+        TEMP_SETTINGS=$(mktemp)
+        jq -s '
+            .[0] as $settings | .[1] as $theme |
+            $settings + {
+                "workbench.colorCustomizations": ($theme.colors // {}),
+                "editor.tokenColorCustomizations": { "textMateRules": ($theme.tokenColors // []) },
+                "editor.semanticTokenColorCustomizations": (if ($theme.semanticTokenColors != null) then { "enabled": true, "rules": $theme.semanticTokenColors } else null end)
+            } | del(.editor.semanticTokenColorCustomizations | select(. == null))
+        ' <(clean_json "$VSCODE_SETTINGS") <(clean_json "$THEME_JSON") > "$TEMP_SETTINGS"
+
+        [ -s "$TEMP_SETTINGS" ] && mv "$TEMP_SETTINGS" "$VSCODE_SETTINGS"
+        rm -f "$TEMP_SETTINGS"
     fi
-
-    notify-send "VS Code" "Injecting theme colors..."
-
-    # 4. Safe Merge
-    TEMP_SETTINGS=$(mktemp)
-
-    jq -s '
-        .[0] as $settings | .[1] as $theme |
-        $settings + {
-            "workbench.colorCustomizations": ($theme.colors // {}),
-            "editor.tokenColorCustomizations": {
-                "textMateRules": ($theme.tokenColors // [])
-            },
-            "editor.semanticTokenColorCustomizations": (
-                if ($theme.semanticTokenColors != null) then
-                    {
-                        "enabled": true,
-                        "rules": $theme.semanticTokenColors
-                    }
-                else
-                    null
-                end
-            )
-        } | del(.editor.semanticTokenColorCustomizations | select(. == null))
-    ' <(clean_json "$VSCODE_SETTINGS") <(clean_json "$THEME_JSON") > "$TEMP_SETTINGS"
-
-    # 5. Apply
-    if [ -s "$TEMP_SETTINGS" ]; then
-        mv "$TEMP_SETTINGS" "$VSCODE_SETTINGS"
-        notify-send "VS Code" "Theme updated to $THEME_NAME"
-    else
-        notify-send "Error" "Failed to merge settings. Check syntax."
-    fi
-    rm -f "$TEMP_SETTINGS"
 fi
 
+# --- 3. RELOAD APPLICATIONS ---
+
+# Apply Hyprpanel theme
 TARGET_THEME_CONFIG="$THEME_DIR/hyprpanel.json"
 [ -f "$TARGET_THEME_CONFIG" ] && hyprpanel useTheme "$TARGET_THEME_CONFIG" &
 
+# Update btop config and signal reload
+# Note: Ensure the theme name matches the .theme file name in ~/.config/btop/themes/
+BTOP_CONF="$HOME/.config/btop/btop.conf"
+if [ -f "$BTOP_CONF" ]; then
+    # We update the config file first so btop reads the new theme on signal
+    sed -i "s/^color_theme = .*/color_theme = \"matugen\"/" "$BTOP_CONF"
+    pkill -USR2 btop
+fi
+
+# Reload Kitty
 pkill -USR1 kitty
-hyprctl reload &
+
+# Reload Cava
+pkill -USR1 cava
+
+# Apply Wallpaper
 swww img "$DEFAULT_WALL" --transition-type grow --transition-fps 60 --transition-step 90 &
 
 wait
+
