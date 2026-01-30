@@ -1,31 +1,31 @@
 * {
-    /* Green_Lush Rofi Palette */
+    /* Scarlet_Night Rofi Palette */
 
     /* Backgrounds */
-    background:     #0a0f0d;
-    surface:        #18211b;
+    background:     #121214;
+    surface:        #27272a;
     
     /* Text */
-    on-background:  #e0e6e2;
-    on-surface:     #e0e6e2;
-    text-dim:       #3d4f43;
+    on-background:  #e5e5ea;
+    on-surface:     #e5e5ea;
+    text-dim:       #3f3f46;
 
-    /* Primary Selection (Sage Box / Dark Text) */
-    primary:        #7cac8a;
-    on-primary:     #0a0f0d;
+    /* Primary Selection (Red Box / White Text) */
+    primary:        #d63a4a;
+    on-primary:     #ffffff;
     
-    /* Secondary (Matcha) */
-    secondary:      #a3c9a8;
-    on-secondary:   #0a0f0d;
+    /* Secondary (Steel) */
+    secondary:      #9e9ea0;
+    on-secondary:   #121214;
 
     /* Status */
-    active:         #7cac8a;
-    selected:       #7cac8a;
-    urgent:         #d48c8c;
-    error:          #d48c8c;
-    on-error:       #e0e6e2;
+    active:         #d63a4a;
+    selected:       #d63a4a;
+    urgent:         #d63a4a;
+    error:          #d63a4a;
+    on-error:       #ffffff;
 
     /* Borders */
-    border-col:     #3d4f43;
-    separator:      #3d4f43;
+    border-col:     #3f3f46;
+    separator:      #3f3f46;
 }

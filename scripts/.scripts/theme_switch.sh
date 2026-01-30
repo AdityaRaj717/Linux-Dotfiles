@@ -91,6 +91,6 @@ pkill -USR1 kitty
 pkill -USR1 cava
 
 # Apply Wallpaper
-swww img "$DEFAULT_WALL" --transition-type grow --transition-fps 60 --transition-step 90 &
+swww img "$DEFAULT_WALL" --transition-type grow --transition-fps 60 --transition-step 10 --transition-duration 3.5 &
 
 wait

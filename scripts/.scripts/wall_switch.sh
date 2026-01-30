@@ -53,5 +53,5 @@ generate_thumbs() {
     [[ "$SELECTED" == "Refresh Thumbnails" ]] && { "$0" refresh; exit 0; }
     
     # Apply wallpaper with optimized transition
-    swww img "$SELECTED" --transition-type wipe --transition-fps 60 --transition-step 255
+    swww img "$SELECTED" --transition-type wipe --transition-fps 60 --transition-step 12 --transition-duration 3
 }
