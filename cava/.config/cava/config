@@ -1,13 +1,13 @@
 [color]
 gradient = 1
 gradient_count = 6
-# Deep Purple -> Mauve -> Pink -> Peach
-gradient_color_1 = '#89b4fa'
-gradient_color_2 = '#cba6f7'
-gradient_color_3 = '#f5c2e7'
-gradient_color_4 = '#eba0ac'
-gradient_color_5 = '#fab387'
-gradient_color_6 = '#f9e2af'
+# Forest -> Sage -> Matcha -> Pale Leaf
+gradient_color_1 = '#3d4f43'
+gradient_color_2 = '#5c8065'
+gradient_color_3 = '#7cac8a'
+gradient_color_4 = '#8fb59b'
+gradient_color_5 = '#a3c9a8'
+gradient_color_6 = '#c5cfc9'
 
 [general]
 mode = scientific
