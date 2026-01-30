@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# THEME: Monochrome
-# DESCRIPTION: Pure OLED Black, Stark White, and Silver Greys.
-# TYPE: Static Palette Injection (True Noir / Ink & Paper)
+# THEME: Solarized_Dark
+# DESCRIPTION: Deep Petrol, Cream Text, Cyan & Amber. (High Visibility Edition)
+# TYPE: Static Palette Injection (Solarized Spec)
 # -----------------------------------------------------------------------------
 
 # --- PATHS ---
@@ -14,58 +14,58 @@ BTOP_THEME="$HOME/.config/btop/themes/matugen.theme"
 CAVA_CONF="$HOME/.config/cava/config"
 
 # --- PALETTE VARIABLES (Raw Hex) ---
-BG="#000000"              # Pure Void
-FG="#ffffff"              # Stark White
-SURFACE="#1a1a1a"         # Dark Graphite
-SURFACE_HIGH="#404040"    # Iron Grey (Borders/Dim)
+BG="#002b36"              # Deep Petrol (Base03)
+FG="#fdf6e3"              # Cream (Base3 - Boosted Brightness)
+SURFACE="#073642"         # Lighter Teal (Base02)
+SURFACE_HIGH="#586e75"    # Muted Grey-Teal (Base01 - Borders/Dim)
 
-ACCENT_PRI="#ffffff"      # Pure Light (Primary)
-ACCENT_TXT="#000000"      # Ink Black (Text on White)
-ACCENT_SEC="#808080"      # Neutral Grey (Secondary)
+ACCENT_PRI="#2aa198"      # Cyan
+ACCENT_TXT="#002b36"      # Dark Text (on Cyan)
+ACCENT_SEC="#b58900"      # Amber
 
-TEXT_DIM="#808080"        # Neutral Grey (Readable Dim Text)
-BORDER_COL="#404040"      # Iron Grey
-ERROR_COL="#ffffff"       # White (Strict Monochrome)
+TEXT_DIM="#586e75"        # Muted Grey-Teal
+BORDER_COL="#586e75"      # Muted Grey-Teal
+ERROR_COL="#dc322f"       # Red
 
 # ---------------------------------------------------------
 # 1. HYPRLAND (colors.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$HYPR_CONF.tmp"
-# Monochrome Hyprland Palette
+# Solarized_Dark Hyprland Palette
 
 # Core
-\$background = rgba(000000ff)
-\$on_background = rgba(ffffffff)
+\$background = rgba(002b36ff)
+\$on_background = rgba(fdf6e3ff)
 
 # Surfaces
-\$surface = rgba(1a1a1aff)
-\$surface_dim = rgba(000000ff)
-\$surface_container = rgba(1a1a1aff)
+\$surface = rgba(073642ff)
+\$surface_dim = rgba(002b36ff)
+\$surface_container = rgba(073642ff)
 
 # FIX: Define the variable causing the 'Red Bar' error
-\$surface_container_high = rgba(404040ff)
+\$surface_container_high = rgba(586e75ff)
 
-# Accents (White + Grey Gradient)
-\$primary = rgba(ffffffff)
-\$secondary = rgba(808080ff)
-\$inactive_border = rgba(404040ff)
+# Accents (Cyan + Amber Gradient)
+\$primary = rgba(2aa198ff)
+\$secondary = rgba(b58900ff)
+\$inactive_border = rgba(586e75ff)
 
 # Text
-\$on_surface = rgba(ffffffff)
-\$on_primary = rgba(000000ff)
+\$on_surface = rgba(fdf6e3ff)
+\$on_primary = rgba(002b36ff)
 EOF
 
 # ---------------------------------------------------------
 # 2. KITTY (current-theme.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$KITTY_CONF.tmp"
-# Monochrome Kitty Theme
+# Solarized_Dark Kitty Theme
 background            $BG
 foreground            $FG
-cursor                $ACCENT_PRI
-selection_background  $ACCENT_PRI
-selection_foreground  $ACCENT_TXT
-url_color             #a0a0a0
+cursor                #d33682
+selection_background  $SURFACE
+selection_foreground  $FG
+url_color             #268bd2
 
 active_border_color   $ACCENT_PRI
 inactive_border_color $SURFACE_HIGH
@@ -74,23 +74,23 @@ active_tab_foreground $ACCENT_TXT
 inactive_tab_background $SURFACE
 inactive_tab_foreground $FG
 
-# ANSI Palette (Strict Grayscale Ramp)
-color0  #1a1a1a
-color8  #404040
-color1  #ffffff
-color9  #e0e0e0
-color2  #ffffff
-color10 #cccccc
-color3  #ffffff
-color11 #b3b3b3
-color4  #ffffff
-color12 #999999
-color5  #ffffff
-color13 #808080
-color6  #ffffff
-color14 #666666
-color7  #e0e0e0
-color15 #ffffff
+# ANSI Palette (Official Solarized)
+color0  #073642
+color8  #002b36
+color1  #dc322f
+color9  #cb4b16
+color2  #859900
+color10 #586e75
+color3  #b58900
+color11 #657b83
+color4  #268bd2
+color12 #839496
+color5  #d33682
+color13 #6c71c4
+color6  #2aa198
+color14 #93a1a1
+color7  #eee8d5
+color15 #fdf6e3
 EOF
 
 # ---------------------------------------------------------
@@ -98,7 +98,7 @@ EOF
 # ---------------------------------------------------------
 cat <<EOF > "$ROFI_CONF.tmp"
 * {
-    /* Monochrome Rofi Palette */
+    /* Solarized_Dark Rofi Palette */
 
     /* Backgrounds */
     background:     $BG;
@@ -109,20 +109,20 @@ cat <<EOF > "$ROFI_CONF.tmp"
     on-surface:     $FG;
     text-dim:       $TEXT_DIM;
 
-    /* Primary Selection (White Box / Black Text) */
+    /* Primary Selection (Cyan Box / Dark Text) */
     primary:        $ACCENT_PRI;
     on-primary:     $ACCENT_TXT;
     
-    /* Secondary (Grey) */
+    /* Secondary (Amber) */
     secondary:      $ACCENT_SEC;
-    on-secondary:   $FG;
+    on-secondary:   $ACCENT_TXT;
 
     /* Status */
     active:         $ACCENT_PRI;
     selected:       $ACCENT_PRI;
     urgent:         $ERROR_COL;
     error:          $ERROR_COL;
-    on-error:       $ACCENT_TXT;
+    on-error:       $FG;
 
     /* Borders */
     border-col:     $BORDER_COL;
@@ -141,22 +141,22 @@ theme[hi_fg]="$ACCENT_PRI"
 theme[selected_bg]="$ACCENT_PRI"
 theme[selected_fg]="$ACCENT_TXT"
 theme[inactive_fg]="$TEXT_DIM"
-theme[graph_text]="$ACCENT_SEC"
+theme[graph_text]="#268bd2"
 theme[cpu_box]="$SURFACE"
 theme[mem_box]="$SURFACE"
 theme[net_box]="$SURFACE"
 theme[proc_box]="$SURFACE"
 theme[div_line]="$SURFACE_HIGH"
-theme[cpu_start]="$SURFACE_HIGH"
-theme[cpu_end]="$ACCENT_PRI"
-theme[mem_start]="$SURFACE_HIGH"
-theme[mem_end]="$ACCENT_PRI"
-theme[net_start]="$SURFACE_HIGH"
-theme[net_end]="$ACCENT_PRI"
-theme[download_start]="$SURFACE_HIGH"
-theme[download_end]="$ACCENT_PRI"
-theme[upload_start]="$SURFACE_HIGH"
-theme[upload_end]="$ACCENT_PRI"
+theme[cpu_start]="#859900"
+theme[cpu_end]="#dc322f"
+theme[mem_start]="#859900"
+theme[mem_end]="#dc322f"
+theme[net_start]="#859900"
+theme[net_end]="#dc322f"
+theme[download_start]="#859900"
+theme[download_end]="#dc322f"
+theme[upload_start]="#859900"
+theme[upload_end]="#dc322f"
 EOF
 
 # ---------------------------------------------------------
@@ -166,13 +166,13 @@ cat <<EOF > "$CAVA_CONF.tmp"
 [color]
 gradient = 1
 gradient_count = 6
-# Dark Grey -> Silver -> White
-gradient_color_1 = '#333333'
-gradient_color_2 = '#555555'
-gradient_color_3 = '#777777'
-gradient_color_4 = '#999999'
-gradient_color_5 = '#bbbbbb'
-gradient_color_6 = '#ffffff'
+# Cyan -> Blue -> Green -> Yellow -> Orange -> Red
+gradient_color_1 = '#2aa198'
+gradient_color_2 = '#268bd2'
+gradient_color_3 = '#859900'
+gradient_color_4 = '#b58900'
+gradient_color_5 = '#cb4b16'
+gradient_color_6 = '#dc322f'
 
 [general]
 mode = scientific
@@ -201,4 +201,4 @@ mv "$BTOP_THEME.tmp" "$BTOP_THEME"
 mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 pkill -USR1 cava || true
-notify-send "Theme" "Monochrome Applied."
+notify-send "Theme" "Solarized Dark Applied."

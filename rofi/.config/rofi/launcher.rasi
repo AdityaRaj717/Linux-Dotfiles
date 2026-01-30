@@ -14,11 +14,11 @@ configuration {
 }
 
 * {
-    bg:                      @surface;
-    bg-alt:                  @surface-container;
+    bg:                      @background;
+    bg-alt:                  @surface;
     accent:                  @primary;
     text:                    @on-surface;
-    text-dim:                @on-surface-variant;
+    text-dim:                @text-dim;
     
     background-color:        transparent;
     text-color:              @text;
@@ -44,6 +44,8 @@ inputbar {
     spacing:                 14px;
     padding:                 18px 22px;
     background-color:        @bg-alt;
+    border:                  1px solid;
+    border-color:            @border-col;
     border-radius:           10px;
     children:                [ prompt, entry ];
 }
@@ -106,6 +108,8 @@ element selected.normal element-text {
 message {
     padding:                 16px;
     background-color:        @bg-alt;
+    border:                  1px solid;
+    border-color:            @border-col;
     border-radius:           10px;
 }
 
@@ -114,3 +118,4 @@ textbox {
     text-color:              @text;
     vertical-align:          0.5;
 }
+

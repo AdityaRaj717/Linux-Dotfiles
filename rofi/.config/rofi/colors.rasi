@@ -1,44 +1,31 @@
 * {
-    background: #050505;
-    on-background: #FFFFFF;
+    /* Catppuccin_Mocha Rofi Palette */
+
+    /* Backgrounds */
+    background:     #1e1e2e;
+    surface:        #313244;
     
-    surface: #101010;
-    surface-dim: #050505;
-    surface-bright: #202020;
+    /* Text */
+    on-background:  #cdd6f4;
+    on-surface:     #cdd6f4;
+    text-dim:       #6c7086;
+
+    /* Primary Selection (Mauve Box / Dark Text) */
+    primary:        #cba6f7;
+    on-primary:     #1e1e2e;
     
-    /* Primary Text (Selected/Important) -> RED */
-    primary: #FF2A2A;
-    on-primary: #FFFFFF;
-    primary-container: #AA0000;
-    on-primary-container: #FFFFFF;
-    
-    /* Secondary Text (List Items) -> WHITE (Was Grey) */
-    secondary: #FFFFFF;
-    on-secondary: #000000;
-    secondary-container: #333333;
-    on-secondary-container: #FFFFFF;
-    
-    /* Tertiary Text -> Bright Grey */
-    tertiary: #CCCCCC;
-    on-tertiary: #000000;
-    tertiary-container: #EEEEEE;
-    on-tertiary-container: #000000;
-    
-    error: #FF2A2A;
-    on-error: #000000;
-    error-container: #AA0000;
-    on-error-container: #FFFFFF;
-    
-    /* Surface Text (Normal Text) -> Pure White */
-    on-surface: #FFFFFF;
-    on-surface-variant: #CCCCCC; 
-    
-    outline: #666666;
-    outline-variant: #333333;
-    shadow: #000000;
-    scrim: #000000;
-    
-    inverse-surface: #FFFFFF;
-    inverse-on-surface: #000000;
-    inverse-primary: #FF2A2A;
+    /* Secondary (Blue) */
+    secondary:      #89b4fa;
+    on-secondary:   #1e1e2e;
+
+    /* Status */
+    active:         #cba6f7;
+    selected:       #cba6f7;
+    urgent:         #f38ba8;
+    error:          #f38ba8;
+    on-error:       #1e1e2e;
+
+    /* Borders */
+    border-col:     #45475a;
+    separator:      #45475a;
 }

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# THEME: Monochrome
-# DESCRIPTION: Pure OLED Black, Stark White, and Silver Greys.
-# TYPE: Static Palette Injection (True Noir / Ink & Paper)
+# THEME: Synth_Wave
+# DESCRIPTION: Void Purple, Neon Magenta, Electric Cyan. (80s Retro Futurism)
+# TYPE: Static Palette Injection
 # -----------------------------------------------------------------------------
 
 # --- PATHS ---
@@ -14,81 +14,81 @@ BTOP_THEME="$HOME/.config/btop/themes/matugen.theme"
 CAVA_CONF="$HOME/.config/cava/config"
 
 # --- PALETTE VARIABLES (Raw Hex) ---
-BG="#000000"              # Pure Void
-FG="#ffffff"              # Stark White
-SURFACE="#1a1a1a"         # Dark Graphite
-SURFACE_HIGH="#404040"    # Iron Grey (Borders/Dim)
+BG="#13001a"              # Void Purple
+FG="#ffffff"              # Pure White
+SURFACE="#2a003b"         # Deep Plum
+SURFACE_HIGH="#530075"    # Muted Violet (Borders/Dim)
 
-ACCENT_PRI="#ffffff"      # Pure Light (Primary)
-ACCENT_TXT="#000000"      # Ink Black (Text on White)
-ACCENT_SEC="#808080"      # Neutral Grey (Secondary)
+ACCENT_PRI="#ff007c"      # Neon Magenta
+ACCENT_TXT="#ffffff"      # White (Text on Magenta)
+ACCENT_SEC="#00f0ff"      # Electric Cyan
 
-TEXT_DIM="#808080"        # Neutral Grey (Readable Dim Text)
-BORDER_COL="#404040"      # Iron Grey
-ERROR_COL="#ffffff"       # White (Strict Monochrome)
+TEXT_DIM="#530075"        # Muted Violet
+BORDER_COL="#530075"      # Muted Violet
+ERROR_COL="#ff2a2a"       # Laser Red
 
 # ---------------------------------------------------------
 # 1. HYPRLAND (colors.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$HYPR_CONF.tmp"
-# Monochrome Hyprland Palette
+# Synth_Wave Hyprland Palette
 
 # Core
-\$background = rgba(000000ff)
+\$background = rgba(13001aff)
 \$on_background = rgba(ffffffff)
 
 # Surfaces
-\$surface = rgba(1a1a1aff)
-\$surface_dim = rgba(000000ff)
-\$surface_container = rgba(1a1a1aff)
+\$surface = rgba(2a003bff)
+\$surface_dim = rgba(13001aff)
+\$surface_container = rgba(2a003bff)
 
 # FIX: Define the variable causing the 'Red Bar' error
-\$surface_container_high = rgba(404040ff)
+\$surface_container_high = rgba(530075ff)
 
-# Accents (White + Grey Gradient)
-\$primary = rgba(ffffffff)
-\$secondary = rgba(808080ff)
-\$inactive_border = rgba(404040ff)
+# Accents (Magenta + Cyan Gradient)
+\$primary = rgba(ff007cff)
+\$secondary = rgba(00f0ffff)
+\$inactive_border = rgba(530075ff)
 
 # Text
 \$on_surface = rgba(ffffffff)
-\$on_primary = rgba(000000ff)
+\$on_primary = rgba(ffffffff)
 EOF
 
 # ---------------------------------------------------------
 # 2. KITTY (current-theme.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$KITTY_CONF.tmp"
-# Monochrome Kitty Theme
+# Synth_Wave Kitty Theme
 background            $BG
 foreground            $FG
-cursor                $ACCENT_PRI
+cursor                $ACCENT_SEC
 selection_background  $ACCENT_PRI
-selection_foreground  $ACCENT_TXT
-url_color             #a0a0a0
+selection_foreground  $FG
+url_color             $ACCENT_SEC
 
 active_border_color   $ACCENT_PRI
 inactive_border_color $SURFACE_HIGH
 active_tab_background $ACCENT_PRI
-active_tab_foreground $ACCENT_TXT
+active_tab_foreground $FG
 inactive_tab_background $SURFACE
 inactive_tab_foreground $FG
 
-# ANSI Palette (Strict Grayscale Ramp)
-color0  #1a1a1a
-color8  #404040
-color1  #ffffff
-color9  #e0e0e0
-color2  #ffffff
-color10 #cccccc
-color3  #ffffff
-color11 #b3b3b3
-color4  #ffffff
-color12 #999999
-color5  #ffffff
-color13 #808080
-color6  #ffffff
-color14 #666666
+# ANSI Palette (Neon Night)
+color0  #2a003b
+color8  #530075
+color1  #ff2a2a
+color9  #ff5555
+color2  #00f0ff
+color10 #80faff
+color3  #ffd700
+color11 #ffe066
+color4  #7a00cc
+color12 #a64dff
+color5  #ff007c
+color13 #ff66b3
+color6  #00f0ff
+color14 #ccfaff
 color7  #e0e0e0
 color15 #ffffff
 EOF
@@ -98,7 +98,7 @@ EOF
 # ---------------------------------------------------------
 cat <<EOF > "$ROFI_CONF.tmp"
 * {
-    /* Monochrome Rofi Palette */
+    /* Synth_Wave Rofi Palette */
 
     /* Backgrounds */
     background:     $BG;
@@ -109,20 +109,20 @@ cat <<EOF > "$ROFI_CONF.tmp"
     on-surface:     $FG;
     text-dim:       $TEXT_DIM;
 
-    /* Primary Selection (White Box / Black Text) */
+    /* Primary Selection (Magenta Box / White Text) */
     primary:        $ACCENT_PRI;
     on-primary:     $ACCENT_TXT;
     
-    /* Secondary (Grey) */
+    /* Secondary (Cyan) */
     secondary:      $ACCENT_SEC;
-    on-secondary:   $FG;
+    on-secondary:   $BG;
 
     /* Status */
     active:         $ACCENT_PRI;
     selected:       $ACCENT_PRI;
     urgent:         $ERROR_COL;
     error:          $ERROR_COL;
-    on-error:       $ACCENT_TXT;
+    on-error:       $FG;
 
     /* Borders */
     border-col:     $BORDER_COL;
@@ -139,7 +139,7 @@ theme[main_fg]="$FG"
 theme[title]="$ACCENT_PRI"
 theme[hi_fg]="$ACCENT_PRI"
 theme[selected_bg]="$ACCENT_PRI"
-theme[selected_fg]="$ACCENT_TXT"
+theme[selected_fg]="$FG"
 theme[inactive_fg]="$TEXT_DIM"
 theme[graph_text]="$ACCENT_SEC"
 theme[cpu_box]="$SURFACE"
@@ -147,15 +147,15 @@ theme[mem_box]="$SURFACE"
 theme[net_box]="$SURFACE"
 theme[proc_box]="$SURFACE"
 theme[div_line]="$SURFACE_HIGH"
-theme[cpu_start]="$SURFACE_HIGH"
+theme[cpu_start]="#7a00cc"
 theme[cpu_end]="$ACCENT_PRI"
-theme[mem_start]="$SURFACE_HIGH"
+theme[mem_start]="#7a00cc"
 theme[mem_end]="$ACCENT_PRI"
-theme[net_start]="$SURFACE_HIGH"
+theme[net_start]="#7a00cc"
 theme[net_end]="$ACCENT_PRI"
-theme[download_start]="$SURFACE_HIGH"
+theme[download_start]="#7a00cc"
 theme[download_end]="$ACCENT_PRI"
-theme[upload_start]="$SURFACE_HIGH"
+theme[upload_start]="#7a00cc"
 theme[upload_end]="$ACCENT_PRI"
 EOF
 
@@ -166,13 +166,13 @@ cat <<EOF > "$CAVA_CONF.tmp"
 [color]
 gradient = 1
 gradient_count = 6
-# Dark Grey -> Silver -> White
-gradient_color_1 = '#333333'
-gradient_color_2 = '#555555'
-gradient_color_3 = '#777777'
-gradient_color_4 = '#999999'
-gradient_color_5 = '#bbbbbb'
-gradient_color_6 = '#ffffff'
+# Deep Purple -> Violet -> Pink -> Orange -> Yellow
+gradient_color_1 = '#7a00cc'
+gradient_color_2 = '#b300cc'
+gradient_color_3 = '#ff007c'
+gradient_color_4 = '#ff5e00'
+gradient_color_5 = '#ffd700'
+gradient_color_6 = '#ffffa0'
 
 [general]
 mode = scientific
@@ -201,4 +201,4 @@ mv "$BTOP_THEME.tmp" "$BTOP_THEME"
 mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 pkill -USR1 cava || true
-notify-send "Theme" "Monochrome Applied."
+notify-send "Theme" "Synth Wave Applied."

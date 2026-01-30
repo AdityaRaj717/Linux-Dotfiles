@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# THEME: Monochrome
-# DESCRIPTION: Pure OLED Black, Stark White, and Silver Greys.
-# TYPE: Static Palette Injection (True Noir / Ink & Paper)
+# THEME: Cyberpunk
+# DESCRIPTION: Deep Void Black, Blinding Neon Yellow, and Electric Cyan.
+# TYPE: Static Palette Injection (High Contrast / Edgerunner Style)
 # -----------------------------------------------------------------------------
 
 # --- PATHS ---
@@ -14,41 +14,41 @@ BTOP_THEME="$HOME/.config/btop/themes/matugen.theme"
 CAVA_CONF="$HOME/.config/cava/config"
 
 # --- PALETTE VARIABLES (Raw Hex) ---
-BG="#000000"              # Pure Void
-FG="#ffffff"              # Stark White
-SURFACE="#1a1a1a"         # Dark Graphite
-SURFACE_HIGH="#404040"    # Iron Grey (Borders/Dim)
+BG="#050510"              # The Void
+FG="#ffffff"              # Pure White Text
+SURFACE="#12121f"         # Dark Indigo-Grey
+SURFACE_HIGH="#2a2a35"    # Muted Steel (Borders/Dim)
 
-ACCENT_PRI="#ffffff"      # Pure Light (Primary)
-ACCENT_TXT="#000000"      # Ink Black (Text on White)
-ACCENT_SEC="#808080"      # Neutral Grey (Secondary)
+ACCENT_PRI="#fcee0a"      # Cyber Yellow (Primary)
+ACCENT_TXT="#000000"      # Black (Text on Yellow - Critical)
+ACCENT_SEC="#00f0ff"      # Electric Cyan (Secondary)
 
-TEXT_DIM="#808080"        # Neutral Grey (Readable Dim Text)
-BORDER_COL="#404040"      # Iron Grey
-ERROR_COL="#ffffff"       # White (Strict Monochrome)
+TEXT_DIM="#797986"        # Dimmed Text
+BORDER_COL="#2a2a35"      # Inactive Border
+ERROR_COL="#ff0055"       # Psycho Red
 
 # ---------------------------------------------------------
 # 1. HYPRLAND (colors.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$HYPR_CONF.tmp"
-# Monochrome Hyprland Palette
+# Cyberpunk Hyprland Palette
 
 # Core
-\$background = rgba(000000ff)
+\$background = rgba(050510ff)
 \$on_background = rgba(ffffffff)
 
 # Surfaces
-\$surface = rgba(1a1a1aff)
-\$surface_dim = rgba(000000ff)
-\$surface_container = rgba(1a1a1aff)
+\$surface = rgba(12121fff)
+\$surface_dim = rgba(050510ff)
+\$surface_container = rgba(12121fff)
 
 # FIX: Define the variable causing the 'Red Bar' error
-\$surface_container_high = rgba(404040ff)
+\$surface_container_high = rgba(2a2a35ff)
 
-# Accents (White + Grey Gradient)
-\$primary = rgba(ffffffff)
-\$secondary = rgba(808080ff)
-\$inactive_border = rgba(404040ff)
+# Accents (Yellow + Cyan Gradient)
+\$primary = rgba(fcee0aff)
+\$secondary = rgba(00f0ffff)
+\$inactive_border = rgba(2a2a35ff)
 
 # Text
 \$on_surface = rgba(ffffffff)
@@ -59,13 +59,13 @@ EOF
 # 2. KITTY (current-theme.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$KITTY_CONF.tmp"
-# Monochrome Kitty Theme
+# Cyberpunk Kitty Theme
 background            $BG
 foreground            $FG
-cursor                $ACCENT_PRI
+cursor                $ACCENT_SEC
 selection_background  $ACCENT_PRI
 selection_foreground  $ACCENT_TXT
-url_color             #a0a0a0
+url_color             $ACCENT_SEC
 
 active_border_color   $ACCENT_PRI
 inactive_border_color $SURFACE_HIGH
@@ -74,21 +74,21 @@ active_tab_foreground $ACCENT_TXT
 inactive_tab_background $SURFACE
 inactive_tab_foreground $FG
 
-# ANSI Palette (Strict Grayscale Ramp)
-color0  #1a1a1a
-color8  #404040
-color1  #ffffff
-color9  #e0e0e0
-color2  #ffffff
-color10 #cccccc
-color3  #ffffff
-color11 #b3b3b3
-color4  #ffffff
-color12 #999999
-color5  #ffffff
-color13 #808080
-color6  #ffffff
-color14 #666666
+# ANSI Palette (Night City Spectrum)
+color0  #12121f
+color8  #3a3a4a
+color1  #ff0055
+color9  #ff2a6d
+color2  #39ff14
+color10 #6aff4d
+color3  #fcee0a
+color11 #fff65c
+color4  #00f0ff
+color12 #66f7ff
+color5  #bd00ff
+color13 #d966ff
+color6  #00f0ff
+color14 #80faff
 color7  #e0e0e0
 color15 #ffffff
 EOF
@@ -96,9 +96,10 @@ EOF
 # ---------------------------------------------------------
 # 3. ROFI (colors.rasi) - FLAT DEFINITIONS
 # ---------------------------------------------------------
+# Uses flat hex definitions for safety and visibility.
 cat <<EOF > "$ROFI_CONF.tmp"
 * {
-    /* Monochrome Rofi Palette */
+    /* Cyberpunk Rofi Palette */
 
     /* Backgrounds */
     background:     $BG;
@@ -109,20 +110,20 @@ cat <<EOF > "$ROFI_CONF.tmp"
     on-surface:     $FG;
     text-dim:       $TEXT_DIM;
 
-    /* Primary Selection (White Box / Black Text) */
+    /* Primary Selection (Yellow Box / Black Text) */
     primary:        $ACCENT_PRI;
     on-primary:     $ACCENT_TXT;
     
-    /* Secondary (Grey) */
+    /* Secondary (Cyan) */
     secondary:      $ACCENT_SEC;
-    on-secondary:   $FG;
+    on-secondary:   $ACCENT_TXT;
 
     /* Status */
     active:         $ACCENT_PRI;
     selected:       $ACCENT_PRI;
     urgent:         $ERROR_COL;
     error:          $ERROR_COL;
-    on-error:       $ACCENT_TXT;
+    on-error:       $FG;
 
     /* Borders */
     border-col:     $BORDER_COL;
@@ -147,15 +148,15 @@ theme[mem_box]="$SURFACE"
 theme[net_box]="$SURFACE"
 theme[proc_box]="$SURFACE"
 theme[div_line]="$SURFACE_HIGH"
-theme[cpu_start]="$SURFACE_HIGH"
+theme[cpu_start]="$ACCENT_SEC"
 theme[cpu_end]="$ACCENT_PRI"
-theme[mem_start]="$SURFACE_HIGH"
+theme[mem_start]="$ACCENT_SEC"
 theme[mem_end]="$ACCENT_PRI"
-theme[net_start]="$SURFACE_HIGH"
+theme[net_start]="$ACCENT_SEC"
 theme[net_end]="$ACCENT_PRI"
-theme[download_start]="$SURFACE_HIGH"
+theme[download_start]="$ACCENT_SEC"
 theme[download_end]="$ACCENT_PRI"
-theme[upload_start]="$SURFACE_HIGH"
+theme[upload_start]="$ACCENT_SEC"
 theme[upload_end]="$ACCENT_PRI"
 EOF
 
@@ -166,13 +167,13 @@ cat <<EOF > "$CAVA_CONF.tmp"
 [color]
 gradient = 1
 gradient_count = 6
-# Dark Grey -> Silver -> White
-gradient_color_1 = '#333333'
-gradient_color_2 = '#555555'
-gradient_color_3 = '#777777'
-gradient_color_4 = '#999999'
-gradient_color_5 = '#bbbbbb'
-gradient_color_6 = '#ffffff'
+# Cyan -> Neon Green -> Yellow -> Psycho Red
+gradient_color_1 = '#00f0ff'
+gradient_color_2 = '#00ff9f'
+gradient_color_3 = '#fcee0a'
+gradient_color_4 = '#ff9900'
+gradient_color_5 = '#ff2a6d'
+gradient_color_6 = '#ff0055'
 
 [general]
 mode = scientific
@@ -201,4 +202,4 @@ mv "$BTOP_THEME.tmp" "$BTOP_THEME"
 mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 pkill -USR1 cava || true
-notify-send "Theme" "Monochrome Applied."
+notify-send "Theme" "Cyberpunk Applied."

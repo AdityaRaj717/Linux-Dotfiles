@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# THEME: Monochrome
-# DESCRIPTION: Pure OLED Black, Stark White, and Silver Greys.
-# TYPE: Static Palette Injection (True Noir / Ink & Paper)
+# THEME: Gruvbox_Retro
+# DESCRIPTION: Hard Contrast Dark Mode. Warm Charcoal, Cream, and Retro Orange.
+# TYPE: Static Palette Injection (Vintage Terminal Style)
 # -----------------------------------------------------------------------------
 
 # --- PATHS ---
@@ -14,58 +14,58 @@ BTOP_THEME="$HOME/.config/btop/themes/matugen.theme"
 CAVA_CONF="$HOME/.config/cava/config"
 
 # --- PALETTE VARIABLES (Raw Hex) ---
-BG="#000000"              # Pure Void
-FG="#ffffff"              # Stark White
-SURFACE="#1a1a1a"         # Dark Graphite
-SURFACE_HIGH="#404040"    # Iron Grey (Borders/Dim)
+BG="#1d2021"              # Hard Dark Charcoal
+FG="#ebdbb2"              # Cream
+SURFACE="#3c3836"         # Dark Brown-Grey
+SURFACE_HIGH="#504945"    # Muted Earth (Borders/Dim)
 
-ACCENT_PRI="#ffffff"      # Pure Light (Primary)
-ACCENT_TXT="#000000"      # Ink Black (Text on White)
-ACCENT_SEC="#808080"      # Neutral Grey (Secondary)
+ACCENT_PRI="#fe8019"      # Retro Orange
+ACCENT_TXT="#1d2021"      # Dark Text (High Contrast on Orange)
+ACCENT_SEC="#fabd2f"      # Retro Yellow
 
-TEXT_DIM="#808080"        # Neutral Grey (Readable Dim Text)
-BORDER_COL="#404040"      # Iron Grey
-ERROR_COL="#ffffff"       # White (Strict Monochrome)
+TEXT_DIM="#928374"        # Gruvbox Grey (Readable Dim Text)
+BORDER_COL="#504945"      # Muted Earth
+ERROR_COL="#cc241d"       # Retro Red
 
 # ---------------------------------------------------------
 # 1. HYPRLAND (colors.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$HYPR_CONF.tmp"
-# Monochrome Hyprland Palette
+# Gruvbox_Retro Hyprland Palette
 
 # Core
-\$background = rgba(000000ff)
-\$on_background = rgba(ffffffff)
+\$background = rgba(1d2021ff)
+\$on_background = rgba(ebdbb2ff)
 
 # Surfaces
-\$surface = rgba(1a1a1aff)
-\$surface_dim = rgba(000000ff)
-\$surface_container = rgba(1a1a1aff)
+\$surface = rgba(3c3836ff)
+\$surface_dim = rgba(1d2021ff)
+\$surface_container = rgba(3c3836ff)
 
 # FIX: Define the variable causing the 'Red Bar' error
-\$surface_container_high = rgba(404040ff)
+\$surface_container_high = rgba(504945ff)
 
-# Accents (White + Grey Gradient)
-\$primary = rgba(ffffffff)
-\$secondary = rgba(808080ff)
-\$inactive_border = rgba(404040ff)
+# Accents (Orange + Yellow Gradient)
+\$primary = rgba(fe8019ff)
+\$secondary = rgba(fabd2fff)
+\$inactive_border = rgba(504945ff)
 
 # Text
-\$on_surface = rgba(ffffffff)
-\$on_primary = rgba(000000ff)
+\$on_surface = rgba(ebdbb2ff)
+\$on_primary = rgba(1d2021ff)
 EOF
 
 # ---------------------------------------------------------
 # 2. KITTY (current-theme.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$KITTY_CONF.tmp"
-# Monochrome Kitty Theme
+# Gruvbox_Retro Kitty Theme
 background            $BG
 foreground            $FG
 cursor                $ACCENT_PRI
-selection_background  $ACCENT_PRI
-selection_foreground  $ACCENT_TXT
-url_color             #a0a0a0
+selection_background  $SURFACE_HIGH
+selection_foreground  $FG
+url_color             #83a598
 
 active_border_color   $ACCENT_PRI
 inactive_border_color $SURFACE_HIGH
@@ -74,23 +74,23 @@ active_tab_foreground $ACCENT_TXT
 inactive_tab_background $SURFACE
 inactive_tab_foreground $FG
 
-# ANSI Palette (Strict Grayscale Ramp)
-color0  #1a1a1a
-color8  #404040
-color1  #ffffff
-color9  #e0e0e0
-color2  #ffffff
-color10 #cccccc
-color3  #ffffff
-color11 #b3b3b3
-color4  #ffffff
-color12 #999999
-color5  #ffffff
-color13 #808080
-color6  #ffffff
-color14 #666666
-color7  #e0e0e0
-color15 #ffffff
+# ANSI Palette (Official Gruvbox)
+color0  #282828
+color8  #928374
+color1  #cc241d
+color9  #fb4934
+color2  #98971a
+color10 #b8bb26
+color3  #d79921
+color11 #fabd2f
+color4  #458588
+color12 #83a598
+color5  #b16286
+color13 #d3869b
+color6  #689d6a
+color14 #8ec07c
+color7  #a89984
+color15 #ebdbb2
 EOF
 
 # ---------------------------------------------------------
@@ -98,7 +98,7 @@ EOF
 # ---------------------------------------------------------
 cat <<EOF > "$ROFI_CONF.tmp"
 * {
-    /* Monochrome Rofi Palette */
+    /* Gruvbox_Retro Rofi Palette */
 
     /* Backgrounds */
     background:     $BG;
@@ -109,20 +109,20 @@ cat <<EOF > "$ROFI_CONF.tmp"
     on-surface:     $FG;
     text-dim:       $TEXT_DIM;
 
-    /* Primary Selection (White Box / Black Text) */
+    /* Primary Selection (Orange Box / Dark Text) */
     primary:        $ACCENT_PRI;
     on-primary:     $ACCENT_TXT;
     
-    /* Secondary (Grey) */
+    /* Secondary (Yellow) */
     secondary:      $ACCENT_SEC;
-    on-secondary:   $FG;
+    on-secondary:   $ACCENT_TXT;
 
     /* Status */
     active:         $ACCENT_PRI;
     selected:       $ACCENT_PRI;
     urgent:         $ERROR_COL;
     error:          $ERROR_COL;
-    on-error:       $ACCENT_TXT;
+    on-error:       $FG;
 
     /* Borders */
     border-col:     $BORDER_COL;
@@ -141,21 +141,21 @@ theme[hi_fg]="$ACCENT_PRI"
 theme[selected_bg]="$ACCENT_PRI"
 theme[selected_fg]="$ACCENT_TXT"
 theme[inactive_fg]="$TEXT_DIM"
-theme[graph_text]="$ACCENT_SEC"
+theme[graph_text]="#d3869b"
 theme[cpu_box]="$SURFACE"
 theme[mem_box]="$SURFACE"
 theme[net_box]="$SURFACE"
 theme[proc_box]="$SURFACE"
 theme[div_line]="$SURFACE_HIGH"
-theme[cpu_start]="$SURFACE_HIGH"
+theme[cpu_start]="#fabd2f"
 theme[cpu_end]="$ACCENT_PRI"
-theme[mem_start]="$SURFACE_HIGH"
+theme[mem_start]="#fabd2f"
 theme[mem_end]="$ACCENT_PRI"
-theme[net_start]="$SURFACE_HIGH"
+theme[net_start]="#fabd2f"
 theme[net_end]="$ACCENT_PRI"
-theme[download_start]="$SURFACE_HIGH"
+theme[download_start]="#fabd2f"
 theme[download_end]="$ACCENT_PRI"
-theme[upload_start]="$SURFACE_HIGH"
+theme[upload_start]="#fabd2f"
 theme[upload_end]="$ACCENT_PRI"
 EOF
 
@@ -166,13 +166,13 @@ cat <<EOF > "$CAVA_CONF.tmp"
 [color]
 gradient = 1
 gradient_count = 6
-# Dark Grey -> Silver -> White
-gradient_color_1 = '#333333'
-gradient_color_2 = '#555555'
-gradient_color_3 = '#777777'
-gradient_color_4 = '#999999'
-gradient_color_5 = '#bbbbbb'
-gradient_color_6 = '#ffffff'
+# Red -> Orange -> Yellow (Warm Heatmap)
+gradient_color_1 = '#cc241d'
+gradient_color_2 = '#fb4934'
+gradient_color_3 = '#d79921'
+gradient_color_4 = '#fe8019'
+gradient_color_5 = '#fab387'
+gradient_color_6 = '#ebdbb2'
 
 [general]
 mode = scientific
@@ -201,4 +201,4 @@ mv "$BTOP_THEME.tmp" "$BTOP_THEME"
 mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 pkill -USR1 cava || true
-notify-send "Theme" "Monochrome Applied."
+notify-send "Theme" "Gruvbox Retro Applied."

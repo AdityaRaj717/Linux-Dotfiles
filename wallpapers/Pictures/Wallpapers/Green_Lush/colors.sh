@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# THEME: Monochrome
-# DESCRIPTION: Pure OLED Black, Stark White, and Silver Greys.
-# TYPE: Static Palette Injection (True Noir / Ink & Paper)
+# THEME: Green_Lush
+# DESCRIPTION: Deep Organic Black, Sage, and Matcha. (Botanical Matte)
+# TYPE: Static Palette Injection
 # -----------------------------------------------------------------------------
 
 # --- PATHS ---
@@ -14,58 +14,58 @@ BTOP_THEME="$HOME/.config/btop/themes/matugen.theme"
 CAVA_CONF="$HOME/.config/cava/config"
 
 # --- PALETTE VARIABLES (Raw Hex) ---
-BG="#000000"              # Pure Void
-FG="#ffffff"              # Stark White
-SURFACE="#1a1a1a"         # Dark Graphite
-SURFACE_HIGH="#404040"    # Iron Grey (Borders/Dim)
+BG="#0a0f0d"              # Deep Jungle
+FG="#e0e6e2"              # Mist White
+SURFACE="#18211b"         # Dark Moss
+SURFACE_HIGH="#3d4f43"    # Shadowed Leaf (Borders/Dim)
 
-ACCENT_PRI="#ffffff"      # Pure Light (Primary)
-ACCENT_TXT="#000000"      # Ink Black (Text on White)
-ACCENT_SEC="#808080"      # Neutral Grey (Secondary)
+ACCENT_PRI="#7cac8a"      # Sage Green (Matte)
+ACCENT_TXT="#0a0f0d"      # Deep Jungle (Dark Text on Sage)
+ACCENT_SEC="#a3c9a8"      # Matcha
 
-TEXT_DIM="#808080"        # Neutral Grey (Readable Dim Text)
-BORDER_COL="#404040"      # Iron Grey
-ERROR_COL="#ffffff"       # White (Strict Monochrome)
+TEXT_DIM="#3d4f43"        # Shadowed Leaf
+BORDER_COL="#3d4f43"      # Shadowed Leaf
+ERROR_COL="#d48c8c"       # Muted Rose
 
 # ---------------------------------------------------------
 # 1. HYPRLAND (colors.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$HYPR_CONF.tmp"
-# Monochrome Hyprland Palette
+# Green_Lush Hyprland Palette
 
 # Core
-\$background = rgba(000000ff)
-\$on_background = rgba(ffffffff)
+\$background = rgba(0a0f0dff)
+\$on_background = rgba(e0e6e2ff)
 
 # Surfaces
-\$surface = rgba(1a1a1aff)
-\$surface_dim = rgba(000000ff)
-\$surface_container = rgba(1a1a1aff)
+\$surface = rgba(18211bff)
+\$surface_dim = rgba(0a0f0dff)
+\$surface_container = rgba(18211bff)
 
 # FIX: Define the variable causing the 'Red Bar' error
-\$surface_container_high = rgba(404040ff)
+\$surface_container_high = rgba(3d4f43ff)
 
-# Accents (White + Grey Gradient)
-\$primary = rgba(ffffffff)
-\$secondary = rgba(808080ff)
-\$inactive_border = rgba(404040ff)
+# Accents (Sage + Matcha Gradient)
+\$primary = rgba(7cac8aff)
+\$secondary = rgba(a3c9a8ff)
+\$inactive_border = rgba(3d4f43ff)
 
 # Text
-\$on_surface = rgba(ffffffff)
-\$on_primary = rgba(000000ff)
+\$on_surface = rgba(e0e6e2ff)
+\$on_primary = rgba(0a0f0dff)
 EOF
 
 # ---------------------------------------------------------
 # 2. KITTY (current-theme.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$KITTY_CONF.tmp"
-# Monochrome Kitty Theme
+# Green_Lush Kitty Theme
 background            $BG
 foreground            $FG
 cursor                $ACCENT_PRI
-selection_background  $ACCENT_PRI
-selection_foreground  $ACCENT_TXT
-url_color             #a0a0a0
+selection_background  $SURFACE_HIGH
+selection_foreground  $FG
+url_color             $ACCENT_PRI
 
 active_border_color   $ACCENT_PRI
 inactive_border_color $SURFACE_HIGH
@@ -74,23 +74,23 @@ active_tab_foreground $ACCENT_TXT
 inactive_tab_background $SURFACE
 inactive_tab_foreground $FG
 
-# ANSI Palette (Strict Grayscale Ramp)
-color0  #1a1a1a
-color8  #404040
-color1  #ffffff
-color9  #e0e0e0
-color2  #ffffff
-color10 #cccccc
-color3  #ffffff
-color11 #b3b3b3
-color4  #ffffff
-color12 #999999
-color5  #ffffff
-color13 #808080
-color6  #ffffff
-color14 #666666
-color7  #e0e0e0
-color15 #ffffff
+# ANSI Palette (The Greenhouse Spectrum)
+color0  #18211b
+color8  #3d4f43
+color1  #d48c8c
+color9  #e0a3a3
+color2  #7cac8a
+color10 #a3c9a8
+color3  #d9d096
+color11 #e6dfb8
+color4  #8ca0b0
+color12 #aabccf
+color5  #b08ca6
+color13 #cfabc5
+color6  #89b8a8
+color14 #a8d1c4
+color7  #c5cfc9
+color15 #e0e6e2
 EOF
 
 # ---------------------------------------------------------
@@ -98,7 +98,7 @@ EOF
 # ---------------------------------------------------------
 cat <<EOF > "$ROFI_CONF.tmp"
 * {
-    /* Monochrome Rofi Palette */
+    /* Green_Lush Rofi Palette */
 
     /* Backgrounds */
     background:     $BG;
@@ -109,20 +109,20 @@ cat <<EOF > "$ROFI_CONF.tmp"
     on-surface:     $FG;
     text-dim:       $TEXT_DIM;
 
-    /* Primary Selection (White Box / Black Text) */
+    /* Primary Selection (Sage Box / Dark Text) */
     primary:        $ACCENT_PRI;
     on-primary:     $ACCENT_TXT;
     
-    /* Secondary (Grey) */
+    /* Secondary (Matcha) */
     secondary:      $ACCENT_SEC;
-    on-secondary:   $FG;
+    on-secondary:   $ACCENT_TXT;
 
     /* Status */
     active:         $ACCENT_PRI;
     selected:       $ACCENT_PRI;
     urgent:         $ERROR_COL;
     error:          $ERROR_COL;
-    on-error:       $ACCENT_TXT;
+    on-error:       $FG;
 
     /* Borders */
     border-col:     $BORDER_COL;
@@ -147,16 +147,16 @@ theme[mem_box]="$SURFACE"
 theme[net_box]="$SURFACE"
 theme[proc_box]="$SURFACE"
 theme[div_line]="$SURFACE_HIGH"
-theme[cpu_start]="$SURFACE_HIGH"
-theme[cpu_end]="$ACCENT_PRI"
-theme[mem_start]="$SURFACE_HIGH"
-theme[mem_end]="$ACCENT_PRI"
-theme[net_start]="$SURFACE_HIGH"
-theme[net_end]="$ACCENT_PRI"
-theme[download_start]="$SURFACE_HIGH"
-theme[download_end]="$ACCENT_PRI"
-theme[upload_start]="$SURFACE_HIGH"
-theme[upload_end]="$ACCENT_PRI"
+theme[cpu_start]="$ACCENT_PRI"
+theme[cpu_end]="$ACCENT_SEC"
+theme[mem_start]="$ACCENT_PRI"
+theme[mem_end]="$ACCENT_SEC"
+theme[net_start]="$ACCENT_PRI"
+theme[net_end]="$ACCENT_SEC"
+theme[download_start]="$ACCENT_PRI"
+theme[download_end]="$ACCENT_SEC"
+theme[upload_start]="$ACCENT_PRI"
+theme[upload_end]="$ACCENT_SEC"
 EOF
 
 # ---------------------------------------------------------
@@ -166,13 +166,13 @@ cat <<EOF > "$CAVA_CONF.tmp"
 [color]
 gradient = 1
 gradient_count = 6
-# Dark Grey -> Silver -> White
-gradient_color_1 = '#333333'
-gradient_color_2 = '#555555'
-gradient_color_3 = '#777777'
-gradient_color_4 = '#999999'
-gradient_color_5 = '#bbbbbb'
-gradient_color_6 = '#ffffff'
+# Forest -> Sage -> Matcha -> Pale Leaf
+gradient_color_1 = '#3d4f43'
+gradient_color_2 = '#5c8065'
+gradient_color_3 = '#7cac8a'
+gradient_color_4 = '#8fb59b'
+gradient_color_5 = '#a3c9a8'
+gradient_color_6 = '#c5cfc9'
 
 [general]
 mode = scientific
@@ -201,4 +201,4 @@ mv "$BTOP_THEME.tmp" "$BTOP_THEME"
 mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 pkill -USR1 cava || true
-notify-send "Theme" "Monochrome Applied."
+notify-send "Theme" "Green Lush Applied."

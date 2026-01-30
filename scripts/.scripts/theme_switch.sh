@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Optimized theme switcher with "Live Inject" & App Reloads
-# Fixes: Race Condition (Red Bar), Cava Reload, Btop (via SIGUSR2)
+# STRICT MODE: Requires colors.sh in theme folder.
 
 WALLPAPER_ROOT="$HOME/Pictures/Wallpapers"
 CACHE_FILE="$HOME/.cache/current_theme"
@@ -16,7 +16,7 @@ mapfile -t themes < <(find -L "$WALLPAPER_ROOT" -mindepth 1 -maxdepth 1 -type d 
 # Build rofi input
 ROFI_INPUT=""
 for theme in "${themes[@]}"; do
-    cover_image=$(find "$WALLPAPER_ROOT/$theme" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -print -quit)
+    cover_image=$(find "$WALLPAPER_ROOT/$theme" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) -print -quit)
     [ -n "$cover_image" ] && ROFI_INPUT+="$theme\0icon\x1f$cover_image\n"
 done
 
@@ -36,14 +36,13 @@ notify-send "Theme" "Applying $THEME_NAME..."
 # Update cache
 echo "$THEME_NAME" > "$CACHE_FILE"
 
-# --- 1. GENERATE COLORS ---
+# --- 1. GENERATE COLORS (STRICT) ---
+# We strictly rely on the existence of colors.sh in the theme folder.
 if [ -x "$THEME_DIR/colors.sh" ]; then
     "$THEME_DIR/colors.sh" "$DEFAULT_WALL"
 else
-    if command -v matugen &> /dev/null; then
-        matugen image "$DEFAULT_WALL" >/dev/null 2>&1
-        cp "$HOME/.config/kitty/themes/Matugen.conf" "$HOME/.config/kitty/current-theme.conf"
-    fi
+    notify-send "Error" "colors.sh not found in $THEME_NAME!"
+    exit 1
 fi
 
 # --- 2. VS CODE INJECT ---
@@ -78,10 +77,9 @@ TARGET_THEME_CONFIG="$THEME_DIR/hyprpanel.json"
 [ -f "$TARGET_THEME_CONFIG" ] && hyprpanel useTheme "$TARGET_THEME_CONFIG" &
 
 # Update btop config and signal reload
-# Note: Ensure the theme name matches the .theme file name in ~/.config/btop/themes/
+# Note: Ensure your colors.sh writes to ~/.config/btop/themes/matugen.theme
 BTOP_CONF="$HOME/.config/btop/btop.conf"
 if [ -f "$BTOP_CONF" ]; then
-    # We update the config file first so btop reads the new theme on signal
     sed -i "s/^color_theme = .*/color_theme = \"matugen\"/" "$BTOP_CONF"
     pkill -USR2 btop
 fi
@@ -96,4 +94,3 @@ pkill -USR1 cava
 swww img "$DEFAULT_WALL" --transition-type grow --transition-fps 60 --transition-step 90 &
 
 wait
-

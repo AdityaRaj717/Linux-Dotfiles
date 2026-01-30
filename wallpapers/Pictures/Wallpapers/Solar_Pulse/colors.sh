@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # -----------------------------------------------------------------------------
-# THEME: Monochrome
-# DESCRIPTION: Pure OLED Black, Stark White, and Silver Greys.
-# TYPE: Static Palette Injection (True Noir / Ink & Paper)
+# THEME: Solar_Pulse
+# DESCRIPTION: Deep Void, Solar Gold, Magma Orange. (High Energy Interface)
+# TYPE: Static Palette Injection
 # -----------------------------------------------------------------------------
 
 # --- PATHS ---
@@ -14,58 +14,58 @@ BTOP_THEME="$HOME/.config/btop/themes/matugen.theme"
 CAVA_CONF="$HOME/.config/cava/config"
 
 # --- PALETTE VARIABLES (Raw Hex) ---
-BG="#000000"              # Pure Void
-FG="#ffffff"              # Stark White
-SURFACE="#1a1a1a"         # Dark Graphite
-SURFACE_HIGH="#404040"    # Iron Grey (Borders/Dim)
+BG="#0a0b10"              # Deep Space
+FG="#fffce6"              # Starlight (Bright Warm White)
+SURFACE="#14161f"         # Event Horizon
+SURFACE_HIGH="#4d3d1a"    # Eclipse Shadow (Borders/Dim)
 
-ACCENT_PRI="#ffffff"      # Pure Light (Primary)
-ACCENT_TXT="#000000"      # Ink Black (Text on White)
-ACCENT_SEC="#808080"      # Neutral Grey (Secondary)
+ACCENT_PRI="#ffcc00"      # Solar Gold
+ACCENT_TXT="#0a0b10"      # Void (Dark Text on Gold)
+ACCENT_SEC="#ff6600"      # Solar Flare (Orange)
 
-TEXT_DIM="#808080"        # Neutral Grey (Readable Dim Text)
-BORDER_COL="#404040"      # Iron Grey
-ERROR_COL="#ffffff"       # White (Strict Monochrome)
+TEXT_DIM="#4d3d1a"        # Eclipse Shadow
+BORDER_COL="#4d3d1a"      # Eclipse Shadow
+ERROR_COL="#ff3333"       # Red Dwarf
 
 # ---------------------------------------------------------
 # 1. HYPRLAND (colors.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$HYPR_CONF.tmp"
-# Monochrome Hyprland Palette
+# Solar_Pulse Hyprland Palette
 
 # Core
-\$background = rgba(000000ff)
-\$on_background = rgba(ffffffff)
+\$background = rgba(0a0b10ff)
+\$on_background = rgba(fffce6ff)
 
 # Surfaces
-\$surface = rgba(1a1a1aff)
-\$surface_dim = rgba(000000ff)
-\$surface_container = rgba(1a1a1aff)
+\$surface = rgba(14161fff)
+\$surface_dim = rgba(0a0b10ff)
+\$surface_container = rgba(14161fff)
 
 # FIX: Define the variable causing the 'Red Bar' error
-\$surface_container_high = rgba(404040ff)
+\$surface_container_high = rgba(4d3d1aff)
 
-# Accents (White + Grey Gradient)
-\$primary = rgba(ffffffff)
-\$secondary = rgba(808080ff)
-\$inactive_border = rgba(404040ff)
+# Accents (Gold + Orange Gradient)
+\$primary = rgba(ffcc00ff)
+\$secondary = rgba(ff6600ff)
+\$inactive_border = rgba(4d3d1aff)
 
 # Text
-\$on_surface = rgba(ffffffff)
-\$on_primary = rgba(000000ff)
+\$on_surface = rgba(fffce6ff)
+\$on_primary = rgba(0a0b10ff)
 EOF
 
 # ---------------------------------------------------------
 # 2. KITTY (current-theme.conf)
 # ---------------------------------------------------------
 cat <<EOF > "$KITTY_CONF.tmp"
-# Monochrome Kitty Theme
+# Solar_Pulse Kitty Theme
 background            $BG
 foreground            $FG
 cursor                $ACCENT_PRI
-selection_background  $ACCENT_PRI
-selection_foreground  $ACCENT_TXT
-url_color             #a0a0a0
+selection_background  $ACCENT_SEC
+selection_foreground  $FG
+url_color             #ff9900
 
 active_border_color   $ACCENT_PRI
 inactive_border_color $SURFACE_HIGH
@@ -74,22 +74,22 @@ active_tab_foreground $ACCENT_TXT
 inactive_tab_background $SURFACE
 inactive_tab_foreground $FG
 
-# ANSI Palette (Strict Grayscale Ramp)
-color0  #1a1a1a
-color8  #404040
-color1  #ffffff
-color9  #e0e0e0
-color2  #ffffff
-color10 #cccccc
-color3  #ffffff
-color11 #b3b3b3
-color4  #ffffff
-color12 #999999
-color5  #ffffff
-color13 #808080
-color6  #ffffff
-color14 #666666
-color7  #e0e0e0
+# ANSI Palette (The Spectrum)
+color0  #14161f
+color8  #333333
+color1  #ff3333
+color9  #ff5555
+color2  #99cc00
+color10 #b3e600
+color3  #ffcc00
+color11 #ffe066
+color4  #00aaff
+color12 #66ccff
+color5  #cc00ff
+color13 #e680ff
+color6  #00ccff
+color14 #80e5ff
+color7  #e6e6e6
 color15 #ffffff
 EOF
 
@@ -98,7 +98,7 @@ EOF
 # ---------------------------------------------------------
 cat <<EOF > "$ROFI_CONF.tmp"
 * {
-    /* Monochrome Rofi Palette */
+    /* Solar_Pulse Rofi Palette */
 
     /* Backgrounds */
     background:     $BG;
@@ -109,20 +109,20 @@ cat <<EOF > "$ROFI_CONF.tmp"
     on-surface:     $FG;
     text-dim:       $TEXT_DIM;
 
-    /* Primary Selection (White Box / Black Text) */
+    /* Primary Selection (Gold Box / Void Text) */
     primary:        $ACCENT_PRI;
     on-primary:     $ACCENT_TXT;
     
-    /* Secondary (Grey) */
+    /* Secondary (Orange) */
     secondary:      $ACCENT_SEC;
-    on-secondary:   $FG;
+    on-secondary:   $ACCENT_TXT;
 
     /* Status */
     active:         $ACCENT_PRI;
     selected:       $ACCENT_PRI;
     urgent:         $ERROR_COL;
     error:          $ERROR_COL;
-    on-error:       $ACCENT_TXT;
+    on-error:       $FG;
 
     /* Borders */
     border-col:     $BORDER_COL;
@@ -141,21 +141,21 @@ theme[hi_fg]="$ACCENT_PRI"
 theme[selected_bg]="$ACCENT_PRI"
 theme[selected_fg]="$ACCENT_TXT"
 theme[inactive_fg]="$TEXT_DIM"
-theme[graph_text]="$ACCENT_SEC"
+theme[graph_text]="#ff9900"
 theme[cpu_box]="$SURFACE"
 theme[mem_box]="$SURFACE"
 theme[net_box]="$SURFACE"
 theme[proc_box]="$SURFACE"
 theme[div_line]="$SURFACE_HIGH"
-theme[cpu_start]="$SURFACE_HIGH"
+theme[cpu_start]="#ff6600"
 theme[cpu_end]="$ACCENT_PRI"
-theme[mem_start]="$SURFACE_HIGH"
+theme[mem_start]="#ff6600"
 theme[mem_end]="$ACCENT_PRI"
-theme[net_start]="$SURFACE_HIGH"
+theme[net_start]="#ff6600"
 theme[net_end]="$ACCENT_PRI"
-theme[download_start]="$SURFACE_HIGH"
+theme[download_start]="#ff6600"
 theme[download_end]="$ACCENT_PRI"
-theme[upload_start]="$SURFACE_HIGH"
+theme[upload_start]="#ff6600"
 theme[upload_end]="$ACCENT_PRI"
 EOF
 
@@ -166,13 +166,13 @@ cat <<EOF > "$CAVA_CONF.tmp"
 [color]
 gradient = 1
 gradient_count = 6
-# Dark Grey -> Silver -> White
-gradient_color_1 = '#333333'
-gradient_color_2 = '#555555'
-gradient_color_3 = '#777777'
-gradient_color_4 = '#999999'
-gradient_color_5 = '#bbbbbb'
-gradient_color_6 = '#ffffff'
+# Deep Red -> Magma -> Orange -> Gold -> White
+gradient_color_1 = '#cc0000'
+gradient_color_2 = '#ff3300'
+gradient_color_3 = '#ff6600'
+gradient_color_4 = '#ff9900'
+gradient_color_5 = '#ffcc00'
+gradient_color_6 = '#ffff00'
 
 [general]
 mode = scientific
@@ -201,4 +201,4 @@ mv "$BTOP_THEME.tmp" "$BTOP_THEME"
 mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 pkill -USR1 cava || true
-notify-send "Theme" "Monochrome Applied."
+notify-send "Theme" "Solar Pulse Applied."

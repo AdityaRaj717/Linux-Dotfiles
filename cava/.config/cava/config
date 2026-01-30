@@ -1,36 +1,29 @@
 [color]
 gradient = 1
 gradient_count = 6
-# Scarlet Night Gradient (Dark Red -> Bright Red -> White)
-gradient_color_1 = '#330000'
-gradient_color_2 = '#550000'
-gradient_color_3 = '#770000'
-gradient_color_4 = '#aa0000'
-gradient_color_5 = '#FF2A2A'
-gradient_color_6 = '#ffffff'
+# Deep Purple -> Mauve -> Pink -> Peach
+gradient_color_1 = '#89b4fa'
+gradient_color_2 = '#cba6f7'
+gradient_color_3 = '#f5c2e7'
+gradient_color_4 = '#eba0ac'
+gradient_color_5 = '#fab387'
+gradient_color_6 = '#f9e2af'
 
 [general]
 mode = scientific
 framerate = 60
 autosens = 1
 sensitivity = 60
-
+bars = 0
+bar_width = 2
+bar_spacing = 1
 [input]
 method = pulse
-
 [output]
 method = ncurses
-
 [smoothing]
 integral = 77
 monstercat = 0
 waves = 0
 gravity = 100
 ignore = 0
-
-[eq]
-1 = 1
-2 = 1
-3 = 1
-4 = 1
-5 = 1

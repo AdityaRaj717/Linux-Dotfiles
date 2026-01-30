@@ -6,8 +6,8 @@
 @import "colors.rasi"
 
 * {
-    bg:                      @surface;
-    bg-alt:                  @surface-container;
+    bg:                      @background;
+    bg-alt:                  @surface;
     accent:                  @primary;
     text:                    @on-surface;
     
@@ -44,12 +44,14 @@ listview {
 element {
     padding:                 12px;
     background-color:        @bg-alt;
+    border:                  1px solid;
+    border-color:            @border-col;
     border-radius:           12px;
     orientation:             vertical;
 }
 
 element selected {
-    background-color:        transparent;
+    background-color:        @bg-alt;
     border:                  3px solid;
     border-color:            @accent;
 }
@@ -64,3 +66,4 @@ element-icon {
 element-text {
     enabled:                 false;
 }
+
