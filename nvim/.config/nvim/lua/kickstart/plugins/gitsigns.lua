@@ -3,10 +3,10 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
-			-- Visual signs for the gutter
+			-- In the opts table:
 			signs = {
-				add = { text = "+" },
-				change = { text = "~" },
+				add = { text = "│" },
+				change = { text = "│" },
 				delete = { text = "_" },
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },

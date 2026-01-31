@@ -30,8 +30,17 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "no"
 vim.opt.completeopt = "menuone,noinsert,noselect"
+
+-- nvim/lua/custom/core/options.lua
+
+-- Custom status column to add spacing
+-- %s = Sign column (if enabled)
+-- %= = Right align the numbers
+-- %{...} = The logic to show relative vs absolute numbers
+-- "  " = THE PADDING (Two spaces at the end)
+vim.opt.statuscolumn = "%s%=%{v:relnum?v:relnum:v:lnum}   "
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -43,7 +52,7 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
@@ -59,3 +68,24 @@ vim.cmd("filetype plugin indent on")
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+vim.opt.cmdheight = 0 -- Makes it cleaner
+
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.shiftwidth = 2 -- Size of an indent
+vim.opt.tabstop = 2 -- Number of spaces tabs count for
+vim.opt.softtabstop = 2
+
+-- Hide the '~' characters on empty lines at the end of the buffer
+vim.opt.fillchars:append({ eob = " " })
+
+-- Hide the ruler (e.g., "10,5" position info) in the bottom right
+-- (You have lualine for this info, so it's redundant)
+vim.opt.ruler = false
+
+-- Don't show the command in the bottom bar (like when you type "d2...")
+vim.opt.showcmd = false
+
+-- Use a global statusline (one single line at the bottom instead of one per window)
+-- This looks much cleaner with splits
+vim.opt.laststatus = 3

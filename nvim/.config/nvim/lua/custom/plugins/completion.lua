@@ -3,7 +3,6 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
 			{
 				"L3MON4D3/LuaSnip",
 				build = (function()
@@ -30,28 +29,35 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			local lspkind = require("lspkind")
-			local s = luasnip.snippet
-			local t = luasnip.text_node
-			local i = luasnip.insert_node
 
-			-- Custom C++ Snippets
-			luasnip.add_snippets("cpp", {
-				s("start", {
-					t({ "#include <bits/stdc++.h>", "using namespace std;", " ", "int main() {" }),
-					i(1),
-					t({ "}" }),
-				}),
-				s("?", {
-					i(1, "Condition "),
-					t("("),
-					i(2, "Statement"),
-					t(") {"),
-					i(3, "Content"),
-					t("}"),
-				}),
-			})
-			luasnip.config.setup({})
+			-- Custom Icons Map
+			local kind_icons = {
+				Text = "󰉿",
+				Method = "󰆧",
+				Function = "󰡱",
+				Constructor = "",
+				Field = "󰜢",
+				Variable = "",
+				Class = "󰠱",
+				Interface = "",
+				Module = "",
+				Property = "󰜢",
+				Unit = "󰑭",
+				Value = "󰎠",
+				Enum = "",
+				Keyword = "󰌋",
+				Snippet = "",
+				Color = "󰏘",
+				File = "󰈙",
+				Reference = "󰈇",
+				Folder = "󰉋",
+				EnumMember = "",
+				Constant = "󰏿",
+				Struct = "󰙅",
+				Event = "",
+				Operator = "󰆕",
+				TypeParameter = "",
+			}
 
 			cmp.setup({
 				snippet = {
@@ -59,46 +65,45 @@ return {
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				formatting = {
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						maxwidth = {
-							menu = 50,
-							abbr = 50,
-						},
-						ellipsis_char = "...",
-						show_labelDetails = true,
-					}),
+				window = {
+					completion = {
+						border = "rounded",
+						winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+						scrollbar = false,
+						col_offset = -3,
+						side_padding = 1,
+					},
+					documentation = {
+						border = "rounded",
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+					},
 				},
-				completion = { completeopt = "menu,menuone,noinsert" },
+				formatting = {
+					fields = { "abbr", "kind", "menu" },
+					format = function(entry, vim_item)
+						local kind_name = vim_item.kind
 
+						-- Icon
+						vim_item.kind = kind_icons[kind_name] or ""
+
+						-- Colorful Menu Text
+						vim_item.menu_hl_group = "CmpItemMenu" .. kind_name
+						vim_item.menu = kind_name
+
+						return vim_item
+					end,
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<C-k>"] = cmp.mapping.select_prev_item(),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<Tab>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete({}),
-					["<C-l>"] = cmp.mapping(function()
-						if luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						end
-					end, { "i", "s" }),
-					["<C-h>"] = cmp.mapping(function()
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						end
-					end, { "i", "s" }),
 				}),
 				sources = {
-					{
-						name = "lazydev",
-						group_index = 0,
-					},
 					{ name = "path" },
+					{ name = "buffer" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "nvim_lsp_signature_help" },
 				},
 			})
 		end,

@@ -90,6 +90,8 @@ pkill -USR1 kitty
 # Reload Cava
 pkill -USR1 cava
 
+pkill -USR1 nvim
+
 # Apply Wallpaper
 swww img "$DEFAULT_WALL" --transition-type grow --transition-fps 60 --transition-step 10 --transition-duration 3.5 &
 

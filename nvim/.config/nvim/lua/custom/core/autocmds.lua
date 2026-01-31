@@ -17,15 +17,15 @@ vim.api.nvim_create_autocmd("UILeave", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
-	callback = function()
-		local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
-		if not normal.bg then
-			return
-		end
-		io.write(string.format("\027]11;#%06x\027\\", normal.bg))
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+-- 	callback = function()
+-- 		local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+-- 		if not normal.bg then
+-- 			return
+-- 		end
+-- 		io.write(string.format("\027]11;#%06x\027\\", normal.bg))
+-- 	end,
+-- })
 
 -- HTML/CSS Indentation overrides
 vim.api.nvim_create_autocmd("FileType", {
@@ -47,3 +47,22 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		end
 	end,
 })
+
+-- [[ Theme Switcher Integration ]]
+local theme_loader = require("custom.core.theme_loader")
+
+-- 1. Load theme on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		theme_loader.load_theme()
+	end,
+})
+
+-- 2. Live Update: Correctly listen for SIGUSR1 using libuv
+local signal = vim.uv.new_signal() -- Use vim.loop.new_signal() if on older Neovim
+signal:start("sigusr1", function()
+	vim.schedule(function()
+		theme_loader.load_theme()
+		print("Theme reloaded!")
+	end)
+end)

@@ -1,31 +1,31 @@
 * {
-    /* Scarlet_Night Rofi Palette */
+    /* Tokyo_Night Rofi Palette */
 
     /* Backgrounds */
-    background:     #121214;
-    surface:        #27272a;
+    background:     #1a1b26;
+    surface:        #24283b;
     
     /* Text */
-    on-background:  #e5e5ea;
-    on-surface:     #e5e5ea;
-    text-dim:       #3f3f46;
+    on-background:  #c0caf5;
+    on-surface:     #c0caf5;
+    text-dim:       #565f89;
 
-    /* Primary Selection (Red Box / White Text) */
-    primary:        #d63a4a;
-    on-primary:     #ffffff;
+    /* Primary Selection (Cyan Box / Dark Text) */
+    primary:        #7dcfff;
+    on-primary:     #15161e;
     
-    /* Secondary (Steel) */
-    secondary:      #9e9ea0;
-    on-secondary:   #121214;
+    /* Secondary (Purple) */
+    secondary:      #bb9af7;
+    on-secondary:   #15161e;
 
     /* Status */
-    active:         #d63a4a;
-    selected:       #d63a4a;
-    urgent:         #d63a4a;
-    error:          #d63a4a;
-    on-error:       #ffffff;
+    active:         #7dcfff;
+    selected:       #7dcfff;
+    urgent:         #f7768e;
+    error:          #f7768e;
+    on-error:       #c0caf5;
 
     /* Borders */
-    border-col:     #3f3f46;
-    separator:      #3f3f46;
+    border-col:     #565f89;
+    separator:      #565f89;
 }

@@ -1,5 +1,4 @@
 -- [[ Kickstart.nvim Structure ]]
-
 -- Set <space> as the leader key
 -- NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
@@ -25,12 +24,12 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
 	-- Load default kickstart plugins that we haven't moved to custom/plugins
+
 	require("kickstart.plugins.debug"),
 	require("kickstart.plugins.indent_line"),
 	require("kickstart.plugins.lint"),
 	require("kickstart.plugins.autopairs"),
 	require("kickstart.plugins.neo-tree"),
-	require("kickstart.plugins.gitsigns"),
 
 	-- Import your custom plugins
 	{ import = "custom.plugins" },
