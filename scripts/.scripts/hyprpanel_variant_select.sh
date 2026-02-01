@@ -9,10 +9,11 @@ ROFI_THEME="$HOME/.config/rofi/hyprpanel-select.rasi"
 # Read current theme (fail fast)
 [ ! -f "$CACHE_FILE" ] && { notify-send "Error" "No theme set."; exit 1; }
 CURRENT_THEME=$(cat "$CACHE_FILE")
-THEME_DIR="$WALLPAPER_ROOT/$CURRENT_THEME"
+# UPDATED: Target the hyprpanel subfolder
+THEME_DIR="$WALLPAPER_ROOT/$CURRENT_THEME/hyprpanel"
 
 # Validate theme directory
-[ ! -d "$THEME_DIR" ] && { notify-send "Error" "Theme directory not found."; exit 1; }
+[ ! -d "$THEME_DIR" ] && { notify-send "Error" "Theme/Hyprpanel directory not found."; exit 1; }
 
 # Find variants efficiently
 mapfile -t VARIANTS < <(find "$THEME_DIR" -type f -name "*.json" -printf '%f\n' | sed 's/\.json$//' | sort)

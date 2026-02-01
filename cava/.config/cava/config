@@ -1,13 +1,13 @@
 [color]
 gradient = 1
 gradient_count = 6
-# Indigo -> Blue -> Cyan -> Teal
-gradient_color_1 = '#7aa2f7'
-gradient_color_2 = '#7dcfff'
-gradient_color_3 = '#bb9af7'
-gradient_color_4 = '#2ac3de'
-gradient_color_5 = '#73daca'
-gradient_color_6 = '#9ece6a'
+# Forest -> Sage -> Matcha -> Pale Leaf
+gradient_color_1 = '#3d4f43'
+gradient_color_2 = '#5c8065'
+gradient_color_3 = '#7cac8a'
+gradient_color_4 = '#8fb59b'
+gradient_color_5 = '#a3c9a8'
+gradient_color_6 = '#c5cfc9'
 
 [general]
 mode = scientific

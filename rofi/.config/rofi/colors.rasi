@@ -1,31 +1,31 @@
 * {
-    /* Tokyo_Night Rofi Palette */
+    /* Green_Lush Rofi Palette */
 
     /* Backgrounds */
-    background:     #1a1b26;
-    surface:        #24283b;
+    background:     #0a0f0d;
+    surface:        #18211b;
     
     /* Text */
-    on-background:  #c0caf5;
-    on-surface:     #c0caf5;
-    text-dim:       #565f89;
+    on-background:  #e0e6e2;
+    on-surface:     #e0e6e2;
+    text-dim:       #3d4f43;
 
-    /* Primary Selection (Cyan Box / Dark Text) */
-    primary:        #7dcfff;
-    on-primary:     #15161e;
+    /* Primary Selection (Sage Box / Dark Text) */
+    primary:        #7cac8a;
+    on-primary:     #0a0f0d;
     
-    /* Secondary (Purple) */
-    secondary:      #bb9af7;
-    on-secondary:   #15161e;
+    /* Secondary (Matcha) */
+    secondary:      #a3c9a8;
+    on-secondary:   #0a0f0d;
 
     /* Status */
-    active:         #7dcfff;
-    selected:       #7dcfff;
-    urgent:         #f7768e;
-    error:          #f7768e;
-    on-error:       #c0caf5;
+    active:         #7cac8a;
+    selected:       #7cac8a;
+    urgent:         #d48c8c;
+    error:          #d48c8c;
+    on-error:       #e0e6e2;
 
     /* Borders */
-    border-col:     #565f89;
-    separator:      #565f89;
+    border-col:     #3d4f43;
+    separator:      #3d4f43;
 }

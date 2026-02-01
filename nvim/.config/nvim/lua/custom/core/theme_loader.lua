@@ -1,6 +1,7 @@
 local M = {}
 
 function M.load_theme()
+	-- Read the current theme name from cache
 	local cache_file = vim.fn.expand("$HOME/.cache/current_theme")
 	if vim.fn.filereadable(cache_file) == 0 then
 		return
@@ -13,7 +14,8 @@ function M.load_theme()
 	local theme_name = f:read("*all"):gsub("%s+", "")
 	f:close()
 
-	local theme_config = vim.fn.expand("$HOME/Pictures/Wallpapers/") .. theme_name .. "/neovim.lua"
+	-- UPDATED PATH: Look inside the 'apps' subdirectory
+	local theme_config = vim.fn.expand("$HOME/Pictures/Wallpapers/") .. theme_name .. "/apps/neovim.lua"
 
 	if vim.fn.filereadable(theme_config) == 1 then
 		-- Clear existing highlights to prevent color bleeding
