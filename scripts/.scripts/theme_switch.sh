@@ -98,8 +98,12 @@ fi
 # --- 3. RELOAD APPLICATIONS ---
 
 # Apply Hyprpanel theme
-TARGET_THEME_CONFIG="$THEME_DIR/hyprpanel/hyprpanel.json"
-[ -f "$TARGET_THEME_CONFIG" ] && hyprpanel useTheme "$TARGET_THEME_CONFIG" &
+# UPDATED: Find ANY json file in the hyprpanel folder and use it
+TARGET_THEME_CONFIG=$(find "$THEME_DIR/hyprpanel" -maxdepth 1 -name "*.json" -print -quit)
+
+if [ -f "$TARGET_THEME_CONFIG" ]; then
+    hyprpanel useTheme "$TARGET_THEME_CONFIG" &
+fi
 
 # Update btop config and signal reload
 BTOP_CONF="$HOME/.config/btop/btop.conf"
@@ -117,6 +121,6 @@ pkill -USR1 cava
 pkill -USR1 nvim
 
 # Apply Wallpaper
-swww img "$DEFAULT_WALL" --transition-type any --transition-fps 60 --transition-step 25 --transition-duration 3 &
+swww img "$DEFAULT_WALL" --transition-type any --transition-fps 165 --transition-step 25 --transition-duration 3 &
 
 wait

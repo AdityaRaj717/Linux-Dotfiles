@@ -303,4 +303,28 @@
     "key": "ctrl+shift+tab",
     "command": "workbench.action.previousEditorInGroup",
   },
+  // 1. Flash - Start (Alt+s)
+  {
+    "key": "alt+s",
+    "command": "flash-vscode.start",
+    "when": "editorTextFocus && neovim.mode != 'insert'",
+  },
+  // 2. Flash - Start Selection (Alt+f)
+  {
+    "key": "alt+f",
+    "command": "flash-vscode.startSelection",
+    "when": "editorTextFocus && neovim.mode != 'insert'",
+  },
+  // 3. Flash - Treesitter Selection (Alt+t)
+  {
+    "key": "alt+t",
+    "command": "flash-vscode.jump.treesitterSelection",
+    "when": "editorTextFocus && neovim.mode != 'insert'",
+  },
+  // 4. Flash - Remote Treesitter Selection (Alt+Shift+t)
+  {
+    "key": "alt+shift+t",
+    "command": "flash-vscode.remoteTreesitterSelection",
+    "when": "editorTextFocus && neovim.mode != 'insert'",
+  },
 ]

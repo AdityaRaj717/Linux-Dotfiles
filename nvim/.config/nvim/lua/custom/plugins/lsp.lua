@@ -160,11 +160,15 @@ return {
 						},
 					},
 				},
-				jdtls = {},
 				pyright = {},
 				eslint = {},
 				html = {},
 				cssls = {},
+				ts_ls = {},
+				tailwindcss = {},
+				emmet_ls = {
+					filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "eruby" },
+				},
 				lua_ls = {
 					settings = {
 						Lua = {

@@ -26,7 +26,6 @@ require("lazy").setup({
 	-- Load default kickstart plugins that we haven't moved to custom/plugins
 
 	require("kickstart.plugins.debug"),
-	require("kickstart.plugins.indent_line"),
 	require("kickstart.plugins.lint"),
 	require("kickstart.plugins.autopairs"),
 	require("kickstart.plugins.neo-tree"),

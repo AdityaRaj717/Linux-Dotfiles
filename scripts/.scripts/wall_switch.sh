@@ -73,5 +73,5 @@ generate_thumbs() {
     echo "$SELECTED" > "$STATE_DIR/${CURRENT_THEME}.wall"
 
     # Apply wallpaper
-    swww img "$SELECTED" --transition-type wipe --transition-fps 60 --transition-step 12 --transition-duration 3
+    swww img "$SELECTED" --transition-type wipe --transition-fps 165 --transition-step 90 --transition-duration 3
 }
