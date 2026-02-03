@@ -195,5 +195,3 @@ mv "$CAVA_CONF.tmp" "$CAVA_CONF"
 
 # Reload Cava
 pkill -USR1 cava || true
-
-notify-send "Theme" "Abyssal Wave Applied."
