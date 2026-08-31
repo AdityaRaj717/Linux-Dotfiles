@@ -44,6 +44,7 @@ alias ani='ani-cli'
 alias fs='nvim $(fzf -m --preview="bat --color=always {}")'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias cat='bat'
+alias npm='nocorrect npm'
 
 # Ranger with directory tracking
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
@@ -51,4 +52,9 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir
 # ========================================
 # Additional Aliases (if you have more)
 # ========================================
-# Add any custom aliases below this line
+
+alias c-opus="claude --model claude-opus-5"
+alias c-flash="claude --model deepseek-v4-flash"
+alias c-gpt="claude --model gpt-5.6-sol"
+alias c-glm="claude --model glm-5.3"
+

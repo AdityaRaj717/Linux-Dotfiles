@@ -1,0 +1,21 @@
+{
+  "name": "live-theme-injector",
+  "displayName": "Live Theme Injector",
+  "version": "1.0.0",
+  "publisher": "me",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "liveTheme.toggle",
+        "title": "Live Theme: Toggle On/Off"
+      }
+    ]
+  }
+}

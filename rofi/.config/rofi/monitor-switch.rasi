@@ -1,0 +1,100 @@
+/*******************************************************************************
+ * ROFI MONITOR MODE SWITCHER
+ * Aesthetic Modern Design - Compact List
+ *******************************************************************************/
+
+@import "colors.rasi"
+
+configuration {
+    show-icons:              false;
+}
+
+* {
+    bg:                      @background;
+    bg-alt:                  @surface;
+    accent:                  @primary;
+    text:                    @on-surface;
+    text-dim:                @text-dim;
+
+    background-color:        transparent;
+    text-color:              @text;
+}
+
+window {
+    location:                center;
+    width:                   520px;
+    background-color:        @bg;
+    border:                  2px solid;
+    border-color:            @accent;
+    border-radius:           16px;
+    padding:                 28px;
+}
+
+mainbox {
+    spacing:                 20px;
+    children:                [ inputbar, listview ];
+}
+
+inputbar {
+    spacing:                 14px;
+    padding:                 18px 22px;
+    background-color:        @bg-alt;
+    border:                  1px solid;
+    border-color:            @border-col;
+    border-radius:           12px;
+    children:                [ prompt, entry ];
+}
+
+prompt {
+    text-color:              @accent;
+    font:                    "GeistMono Nerd Font Propo Bold 12";
+    vertical-align:          0.5;
+}
+
+entry {
+    placeholder:             "Select monitor mode...";
+    placeholder-color:       @text-dim;
+    font:                    "GeistMono Nerd Font Propo Medium 11";
+    cursor:                  text;
+    vertical-align:          0.5;
+}
+
+listview {
+    columns:                 1;
+    lines:                   2;
+    spacing:                 8px;
+    scrollbar:               false;
+    cycle:                   true;
+    dynamic:                 false;
+    fixed-height:            true;
+}
+
+element {
+    padding:                 18px 22px;
+    background-color:        @bg-alt;
+    border:                  1px solid;
+    border-color:            @border-col;
+    border-radius:           12px;
+}
+
+element normal.normal {
+    background-color:        @bg-alt;
+    border-color:            @border-col;
+}
+
+element selected.normal {
+    background-color:        @bg-alt;
+    border:                  2px solid;
+    border-color:            @accent;
+}
+
+element-text {
+    vertical-align:          0.5;
+    text-color:              inherit;
+    font:                    "GeistMono Nerd Font Propo Medium 12";
+}
+
+element selected.normal element-text {
+    text-color:              @accent;
+    font:                    "GeistMono Nerd Font Propo Bold 12";
+}

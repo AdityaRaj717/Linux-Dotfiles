@@ -10,6 +10,7 @@ export ZSH="/usr/share/oh-my-zsh"
 DISABLE_MAGIC_FUNCTIONS="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Plugins
 [[ -z "${plugins[*]}" ]] && plugins=(git fzf extract)
@@ -56,9 +57,28 @@ eval "$(zoxide init zsh)"
 
 # Misc
 
+export MANPAGER="nvim +Man!"
+export MANWIDTH=999
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Start ssh-agent and add key
 eval $(keychain --eval --quiet github_auth 2>/dev/null)
 
 
 # Run on launch
 nitch
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export PATH=$PATH:/usr/local/go/bin
+
+. "$HOME/.local/bin/env"
+
+# opencode
+export PATH=/home/aditya/.opencode/bin:$PATH
+
+# MISC
+export PATH="$HOME/.local/bin:$PATH"
+export ANTHROPIC_BASE_URL="https://agentrouter.org"
+export ANTHROPIC_AUTH_TOKEN="sk-Ashj8e6dAnijUr369kJ4lAACRkYKKLfTt0kDE5cjhXprlQ06"

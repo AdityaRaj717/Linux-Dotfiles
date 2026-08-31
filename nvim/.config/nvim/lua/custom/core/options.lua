@@ -77,7 +77,7 @@ vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.softtabstop = 2
 
 -- Hide the '~' characters on empty lines at the end of the buffer
-vim.opt.fillchars:append({ eob = " " })
+-- vim.opt.fillchars:append({ eob = " " })
 
 -- Hide the ruler (e.g., "10,5" position info) in the bottom right
 -- (You have lualine for this info, so it's redundant)
@@ -89,3 +89,10 @@ vim.opt.showcmd = false
 -- Use a global statusline (one single line at the bottom instead of one per window)
 -- This looks much cleaner with splits
 vim.opt.laststatus = 3
+
+-- [[ Folding Options ]]
+vim.opt.foldcolumn = "1" -- '0' is not bad
+vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]

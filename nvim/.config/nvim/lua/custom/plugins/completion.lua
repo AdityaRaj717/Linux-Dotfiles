@@ -30,6 +30,8 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 
+			luasnip.filetype_extend("javascript", { "javascriptreact" })
+
 			-- Custom Icons Map
 			local kind_icons = {
 				Text = "󰉿",

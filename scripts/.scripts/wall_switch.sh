@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Optimized wallpaper selector with thumbnail caching & "Latest First" sorting
+# Wallpaper selector with thumbnail caching & "Latest First" sorting
 
 WALLPAPER_ROOT="$HOME/Pictures/Wallpapers"
 CACHE_FILE="$HOME/.cache/current_theme"
@@ -69,9 +69,10 @@ generate_thumbs() {
     [ -z "$SELECTED" ] && exit 0
     [[ "$SELECTED" == "Refresh Thumbnails" ]] && { "$0" refresh; exit 0; }
     
-    # UPDATED: Save the selected wallpaper to state file
+    # Save the selected wallpaper to state file
     echo "$SELECTED" > "$STATE_DIR/${CURRENT_THEME}.wall"
 
     # Apply wallpaper
-    swww img "$SELECTED" --transition-type wipe --transition-fps 165 --transition-step 90 --transition-duration 3
+    awww img "$SELECTED" --transition-type wipe --transition-fps 165 --transition-step 90 --transition-duration 3
+    notify-send "Wallpaper" "Changed to: $(basename "$SELECTED")" -i "$SELECTED"
 }

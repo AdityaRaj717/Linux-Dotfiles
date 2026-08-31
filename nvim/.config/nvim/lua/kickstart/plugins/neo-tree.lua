@@ -22,6 +22,10 @@ return {
 				},
 			},
 			hijack_netrw_behavior = "open_current",
+			filtered_items = {
+				visible = true, -- Set to true to make hidden items visible by default
+				hide_dotfiles = false, -- Explicitly show dotfiles
+			},
 		},
 		event_handlers = {
 			{

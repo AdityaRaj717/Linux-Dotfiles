@@ -1,7 +1,7 @@
 return {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
-		branch = "master", -- [FIX] Pin to master branch to fix "configs" module error
+		branch = "main", -- [FIX] Pin to master branch to fix "configs" module error
 		build = ":TSUpdate",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
@@ -13,6 +13,8 @@ return {
 
 			configs.setup({
 				ensure_installed = {
+					"python",
+					"go",
 					"bash",
 					"c",
 					"javascript",

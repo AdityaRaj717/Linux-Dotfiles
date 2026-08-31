@@ -30,6 +30,9 @@ if [ "$IS_BATTERY_SAVER" = "1" ]; then
         keyword decoration:rounding 0;\
         keyword decoration:active_opacity 1.0;\
         keyword decoration:inactive_opacity 1.0;\
+        keyword windowrulev2 \"opacity 1.0 override 1.0 override, class:^(.*)$\";\
+        keyword windowrulev2 \"opacity 1.0 override 1.0 override, class:^(kitty|Alacritty)$\";\
+        keyword windowrulev2 \"forcergbx on, class:^(kitty|Alacritty)$\";\
         keyword misc:vfr true;\
         keyword monitor $NAME,${WIDTH}x${HEIGHT}@60,auto,$SCALE"
 
@@ -38,7 +41,7 @@ if [ "$IS_BATTERY_SAVER" = "1" ]; then
         powerprofilesctl set power-saver
     fi
 
-    notify-send -u normal -t 3000 "Battery Saver" "ON 🔋\n- ${WIDTH}x${HEIGHT}@60Hz\n- Effects Disabled"
+    notify-send -u normal -t 5000 "Battery Saver" "ON 🔋\n- ${WIDTH}x${HEIGHT}@60Hz\n- Effects Disabled"
 else
     # =================================================================
     # TURN OFF BATTERY SAVER (Performance Mode)
@@ -49,8 +52,8 @@ else
     
     # 2. RESTORE SYSTEM POWER PROFILE
     if command -v powerprofilesctl &> /dev/null; then
-        powerprofilesctl set balanced
+        powerprofilesctl set power-saver
     fi
 
-    notify-send -u normal -t 3000 "Battery Saver" "OFF ⚡\n- High Refresh Restored\n- Visuals Restored"
+    notify-send -u normal -t 5000 "Battery Saver" "OFF ⚡\n- High Refresh Restored\n- Visuals Restored"
 fi

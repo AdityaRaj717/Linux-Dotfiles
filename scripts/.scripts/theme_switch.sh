@@ -8,8 +8,8 @@ CACHE_FILE="$HOME/.cache/current_theme"
 ROFI_THEME="$HOME/.config/rofi/theme-select.rasi"
 STATE_DIR="$HOME/.cache/theme_state"
 
-# Ensure swww daemon is running
-pgrep -x swww-daemon >/dev/null || { swww-daemon & sleep 0.5; }
+# Ensure awww daemon is running
+pgrep -x awww-daemon >/dev/null || { swww-daemon & sleep 0.5; }
 
 # Build theme list
 mapfile -t themes < <(find -L "$WALLPAPER_ROOT" -mindepth 1 -maxdepth 1 -type d -printf '%P\n' | sort)
@@ -45,8 +45,6 @@ THEME_NAME=$(echo -en "$ROFI_INPUT" | rofi -dmenu -show-icons -theme "$ROFI_THEM
 # Get details
 THEME_DIR="$WALLPAPER_ROOT/$THEME_NAME"
 
-notify-send "Theme" "Applying $THEME_NAME..."
-
 # Update cache
 echo "$THEME_NAME" > "$CACHE_FILE"
 
@@ -71,34 +69,26 @@ else
 fi
 
 # --- 2. VS CODE INJECT ---
-VSCODE_SETTINGS="$HOME/.config/Code/User/settings.json"
+
+clean_json() {
+    # Removes comments and trailing commas
+    tr -d '\r' < "$1" | sed -E 's|^[[:space:]]*//.*||g' | sed -E 's|([[:space:]])//.*|\1|g' | sed -z 's/,\s*}/}/g; s/,\s*]/]/g'
+}
+
 THEME_JSON="$THEME_DIR/apps/vscode.json"
+TARGET_JSON="$HOME/.cache/vscode-active-theme.json"
 
-if [ -f "$VSCODE_SETTINGS" ] && [ -f "$THEME_JSON" ]; then
-    clean_json() {
-        tr -d '\r' < "$1" | sed -E 's|^[[:space:]]*//.*||g' | sed -E 's|([[:space:]])//.*|\1|g' | sed -z 's/,\s*}/}/g; s/,\s*]/]/g'
-    }
-
-    if clean_json "$THEME_JSON" | jq '.' >/dev/null 2>&1; then
-        TEMP_SETTINGS=$(mktemp)
-        jq -s '
-            .[0] as $settings | .[1] as $theme |
-            $settings + {
-                "workbench.colorCustomizations": ($theme.colors // {}),
-                "editor.tokenColorCustomizations": { "textMateRules": ($theme.tokenColors // []) },
-                "editor.semanticTokenColorCustomizations": (if ($theme.semanticTokenColors != null) then { "enabled": true, "rules": $theme.semanticTokenColors } else null end)
-            } | del(.editor.semanticTokenColorCustomizations | select(. == null))
-        ' <(clean_json "$VSCODE_SETTINGS") <(clean_json "$THEME_JSON") > "$TEMP_SETTINGS"
-
-        [ -s "$TEMP_SETTINGS" ] && mv "$TEMP_SETTINGS" "$VSCODE_SETTINGS"
-        rm -f "$TEMP_SETTINGS"
-    fi
+if [ -f "$THEME_JSON" ]; then
+    # Simply copy the file. The VS Code extension watches the file and handles the rest.
+    clean_json "$THEME_JSON" > "$TARGET_JSON"
+else
+    # If no theme file exists, empty the cache so VS Code resets
+    echo "{}" > "$TARGET_JSON"
 fi
 
 # --- 3. RELOAD APPLICATIONS ---
 
 # Apply Hyprpanel theme
-# UPDATED: Find ANY json file in the hyprpanel folder and use it
 TARGET_THEME_CONFIG=$(find "$THEME_DIR/hyprpanel" -maxdepth 1 -name "*.json" -print -quit)
 
 if [ -f "$TARGET_THEME_CONFIG" ]; then
@@ -121,6 +111,10 @@ pkill -USR1 cava
 pkill -USR1 nvim
 
 # Apply Wallpaper
-swww img "$DEFAULT_WALL" --transition-type any --transition-fps 165 --transition-step 25 --transition-duration 3 &
+awww img "$DEFAULT_WALL" --transition-type any --transition-fps 165 --transition-step 25 --transition-duration 3 &
 
 wait
+sleep 0.5
+
+# 3. Send the notification NOW, after the reload is complete
+notify-send "Theme" "Applied: $THEME_NAME" -i "$DEFAULT_WALL"
